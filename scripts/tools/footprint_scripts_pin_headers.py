@@ -15,6 +15,7 @@ from drawing_tools import *  # NOQA
 from math import sqrt
 
 crt_offset = 0.5 # different for connectors
+slk_offset = 0.11
 
 def makePinHeadStraight(rows, cols, rm, coldist, package_width, overlen_top, overlen_bottom, ddrill, pad,
                         tags_additional=[], lib_name="${{KISYS3DMOD}}/Pin_Headers", classname="Pin_Header", classname_description="pin header", offset3d=[0, 0, 0], scale3d=[1, 1, 1],
@@ -262,6 +263,172 @@ def makePinHeadStraight(rows, cols, rm, coldist, package_width, overlen_top, ove
     # add model
     kicad_modg.append(
         Model(filename=lib_name + ".3dshapes/" + footprint_name + ".wrl", at=offset3d, scale=scale3d, rotate=rotate3d))
+    
+    # print render tree
+    # print(kicad_mod.getRenderTree())
+    # print(kicad_mod.getCompleteRenderTree())
+    
+    # write file
+    file_handler = KicadFileHandler(kicad_mod)
+    file_handler.writeFile(footprint_name + '.kicad_mod')
+
+
+def makePinHeadStraightShroud(rows, cols, rm, coldist, package_width, overlen_top, overlen_bottom, ddrill, pad,
+                        mating_overlen, wall_thickness, notch_width, latch_len=0, latch_width=0,
+                        tags_additional=[], lib_name="${{KISYS3DMOD}}/Connector_PinHeader", classname="PinHeader", classname_description="shrouded pin header", offset3d=[0, 0, 0], scale3d=[1, 1, 1],
+                        rotate3d=[0, 0, 0], isSocket=False):
+    h_fab = (rows - 1) * rm + overlen_top + overlen_bottom
+    w_fab = package_width
+    l_fab = (coldist * (cols - 1) - w_fab) / 2
+    t_fab = -overlen_top
+    
+    center_fab = t_fab + (h_fab/2) # center of the body height (the middle pin or the center of the middle pins)
+    
+    h_slk = h_fab + 2 * slk_offset
+    w_slk = max(w_fab + 2 * slk_offset, coldist * (cols - 1) - pad[0] - 4 * slk_offset)
+    l_slk = (coldist * (cols - 1) - w_slk) / 2
+    t_slk = -overlen_top - slk_offset
+    
+    w_crt = max(package_width, coldist * (cols - 1) + pad[0]) + 2 * crt_offset
+    h_crt = max(h_fab, (rows - 1) * rm + pad[1]) + 2 * crt_offset
+    l_crt = coldist * (cols - 1) / 2 - w_crt / 2
+    t_crt = (rows - 1) * rm / 2 - h_crt / 2
+    
+    text_size = w_fab*0.6
+    fab_text_size_max = 1.0
+    if text_size < fab_text_size_min:
+        text_size = fab_text_size_min
+    elif text_size > fab_text_size_max:
+        text_size = fab_text_size_max
+    text_size = round(text_size, 2)
+    text_size = [text_size,text_size]
+    text_t = text_size[0] * 0.15
+    
+    footprint_name = "{3}Shroud_{0}x{1:02}_P{2:03.2f}mm_Latch{4:03.1f}mm_Vertical".format(cols, rows, rm, classname, latch_len)
+    
+    description = "Through hole vertical {3}, {0}x{1:02}, {2:03.2f}mm pitch, {4:03.1f}mm latch length".format(cols, rows, rm, classname_description, latch_len)
+    tags = "Through hole vertical {3} THT {0}x{1:02} {2:03.2f}mm".format(cols, rows, rm, classname_description)
+    if (cols == 1):
+        description = description + ", single row"
+        tags = tags + " single row"
+    elif (cols == 2):
+        description = description + ", double rows"
+        tags = tags + " double row"
+    elif (cols == 3):
+        description = description + ", triple rows"
+        tags = tags + " triple row"
+    elif (cols == 4):
+        description = description + ", quadruple rows"
+        tags = tags + " quadruple row"
+    
+    if (len(tags_additional) > 0):
+        for t in tags_additional:
+            footprint_name = footprint_name + "_" + t
+            description = description + ", " + t
+            tags = tags + " " + t
+    
+    print(footprint_name)
+    
+    # init kicad footprint
+    kicad_mod = Footprint(footprint_name)
+    kicad_mod.setDescription(description)
+    kicad_mod.setTags(tags)
+    
+    # anchor for SMD-symbols is in the center, for THT-symbols at pin1
+    offset=[0,0]
+    if isSocket and cols>1:
+        offset = [-coldist, 0]
+    kicad_modg = Translation(offset[0], offset[1])
+    kicad_mod.append(kicad_modg)
+    
+    # set general values
+    kicad_modg.append(
+        Text(type='reference', text='REF**', at=[coldist * (cols - 1) / 2, t_slk - txt_offset - latch_len], layer='F.SilkS'))
+    kicad_modg.append(
+        Text(type='user', text='%R', at=[rm/2*(cols-1), t_crt + offset[1] + (h_crt/2)], rotation=90, layer='F.Fab', size=text_size ,thickness=text_t))
+    kicad_modg.append(
+        Text(type='value', text=footprint_name, at=[coldist * (cols - 1) / 2, t_slk + h_slk + txt_offset + latch_len], layer='F.Fab'))
+    
+    # for shrouded headers, fab and silk layers have the same geometry
+    # these lists capture fab and then the silk layer settings so the same code can draw elements for both layers
+    layers = ['F.Fab', 'F.SilkS']
+    line_widths = [lw_fab, lw_slk]
+    lyr_offsets = [0, slk_offset]
+    chamfers = [min(1, w_fab/4), 0] # limit to 1mm max per KLC
+    
+    for layer, line_width, lyr_offset, chamfer in zip(layers, line_widths, lyr_offsets, chamfers):
+        # body outline
+        #chamfer = min(1, w_fab/4) # limit to 1mm max per KLC
+        kicad_modg.append(Line(start=[l_fab + chamfer - lyr_offset, t_fab - lyr_offset], end=[l_fab + w_fab + lyr_offset, t_fab - lyr_offset], layer=layer, width=line_width))
+        kicad_modg.append(Line(start=[l_fab + w_fab + lyr_offset, t_fab - lyr_offset], end=[l_fab + w_fab + lyr_offset, t_fab + h_fab + lyr_offset], layer=layer, width=line_width))
+        kicad_modg.append(Line(start=[l_fab + w_fab + lyr_offset, t_fab + h_fab + lyr_offset], end=[l_fab - lyr_offset, t_fab + h_fab + lyr_offset], layer=layer, width=line_width))
+        kicad_modg.append(Line(start=[l_fab - lyr_offset, t_fab + h_fab + lyr_offset], end=[l_fab - lyr_offset, t_fab + chamfer - lyr_offset], layer=layer, width=line_width))
+        if chamfer > 0:
+            kicad_modg.append(Line(start=[l_fab, t_fab+chamfer], end=[l_fab + chamfer, t_fab], layer=layer, width=line_width))
+        
+        # mating connector outline (this is the same for both layers)
+        kicad_modg.append(Line(start=[l_fab - lyr_offset, center_fab - notch_width/2], end=[l_fab + wall_thickness, center_fab - notch_width/2], layer=layer, width=line_width))
+        kicad_modg.append(Line(start=[l_fab + wall_thickness, center_fab - notch_width/2], end=[l_fab + wall_thickness, -mating_overlen], layer=layer, width=line_width))
+        kicad_modg.append(Line(start=[l_fab + wall_thickness, -mating_overlen], end=[l_fab + w_fab - wall_thickness, -mating_overlen], layer=layer, width=line_width))
+        kicad_modg.append(Line(start=[l_fab + w_fab - wall_thickness, -mating_overlen], end=[l_fab + w_fab - wall_thickness, (rows - 1) * rm + mating_overlen], layer=layer, width=line_width))
+        kicad_modg.append(Line(start=[l_fab + w_fab - wall_thickness, (rows - 1) * rm + mating_overlen], end=[l_fab + wall_thickness, (rows - 1) * rm + mating_overlen], layer=layer, width=line_width))
+        kicad_modg.append(Line(start=[l_fab + wall_thickness, (rows - 1) * rm + mating_overlen], end=[l_fab + wall_thickness, center_fab + notch_width/2], layer=layer, width=line_width))
+        kicad_modg.append(Line(start=[l_fab - lyr_offset, center_fab + notch_width/2], end=[l_fab + wall_thickness, center_fab + notch_width/2], layer=layer, width=line_width))
+        
+        # latches
+        if latch_len > 0 and latch_width > 0:
+            # top latch
+            kicad_modg.append(Line(start=[coldist/2 - latch_width/2 - lyr_offset, t_fab - lyr_offset], end=[coldist/2 - latch_width/2 - lyr_offset, t_fab - latch_len - lyr_offset], layer=layer, width=line_width))
+            kicad_modg.append(Line(start=[coldist/2 - latch_width/2 - lyr_offset, t_fab - latch_len - lyr_offset], end=[coldist/2 + latch_width/2 + lyr_offset, t_fab - latch_len - lyr_offset], layer=layer, width=line_width))
+            kicad_modg.append(Line(start=[coldist/2 + latch_width/2 + lyr_offset, t_fab - latch_len - lyr_offset], end=[coldist/2 + latch_width/2 + lyr_offset, t_fab - lyr_offset], layer=layer, width=line_width))
+            # bottom latch
+            kicad_modg.append(Line(start=[coldist/2 - latch_width/2 - lyr_offset, t_fab + h_fab + lyr_offset], end=[coldist/2 - latch_width/2 - lyr_offset, t_fab + h_fab + latch_len + lyr_offset], layer=layer, width=line_width))
+            kicad_modg.append(Line(start=[coldist/2 - latch_width/2 - lyr_offset, t_fab + h_fab + latch_len + lyr_offset], end=[coldist/2 + latch_width/2 + lyr_offset, t_fab + h_fab + latch_len + lyr_offset], layer=layer, width=line_width))
+            kicad_modg.append(Line(start=[coldist/2 + latch_width/2 + lyr_offset, t_fab + h_fab + latch_len + lyr_offset], end=[coldist/2 + latch_width/2 + lyr_offset, t_fab + h_fab + lyr_offset], layer=layer, width=line_width))
+    
+    # create courtyard
+    kicad_mod.append(RectLine(start=[roundCrt(l_crt + offset[0]), roundCrt(t_crt + offset[1] - latch_len)],
+                              end=[roundCrt(l_crt + offset[0] + w_crt), roundCrt(t_crt + offset[1] + h_crt + latch_len)],
+                              layer='F.CrtYd', width=lw_crt))
+    
+    # create pads
+    p1 = int(1)
+    x1 = 0
+    y1 = 0 
+    
+    pad_type = Pad.TYPE_THT 
+    pad_shape1 = Pad.SHAPE_RECT 
+    pad_shapeother = Pad.SHAPE_OVAL 
+    pad_layers = Pad.LAYERS_THT
+     
+    p = 1 
+     
+    for r in range(1, rows + 1): 
+         
+        if isSocket and cols>1: 
+            x1=coldist 
+        else: 
+            x1 = 0 
+        for c in range(1, cols + 1): 
+            if p == 1: 
+                kicad_modg.append(Pad(number=p, type=pad_type, shape=pad_shape1, at=[x1, y1], size=pad, drill=ddrill, 
+                                      layers=pad_layers)) 
+            else:
+                kicad_modg.append(
+                    Pad(number=p, type=pad_type, shape=pad_shapeother, at=[x1, y1], size=pad, drill=ddrill,
+                        layers=pad_layers))
+            
+            p = p + 1
+            if isSocket and cols>1:
+                x1 = x1 - coldist
+            else:
+                x1 = x1 + coldist
+        
+        y1 = y1 + rm
+    
+    # add model
+    kicad_modg.append(
+        Model(filename="{0}_{1:03.2f}mm.3dshapes/{2}.wrl".format(lib_name, rm, footprint_name), at=offset3d, scale=scale3d, rotate=rotate3d))
     
     # print render tree
     # print(kicad_mod.getRenderTree())
