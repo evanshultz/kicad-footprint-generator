@@ -46,17 +46,21 @@ if __name__ == '__main__':
     mating_overlen=3.92
     wall_thickness=1.2
     notch_width=4.1
-    latch_lengths = [6.5,9.5,12] # these values roughly represent the referenced parts with the latch open
+    latch_lengths = [0,6.5,9.5,12] # these values roughly represent the referenced parts with the latch open
     #latch_lengths = [6.5]
     latch_width=4.4 # large enough to handle all referenced parts
-
+    mh_ddrill=2.69
+    mh_pad=8 # 3M datasheet says 5/16" head
+    mh_overlen=2.03
 
     cols = 2
     for rows in [5,7,8,10,12,13,15,17,20,25,30,32]:
         for latch_len in latch_lengths:
-            makePinHeadStraightShroud(rows, cols, rm, rm, body_width,
-                                body_overlen,
-                                body_overlen, ddrill, pad,
-                                mating_overlen, wall_thickness, notch_width, latch_len, latch_width,
-                                [], "${KISYS3DMOD}/Connector_PinHeader", "PinHeader", "shrouded pin header",
-                                [0, 0, 0], [1, 1, 1], [0, 0, 0])
+            for mh_ddrill, mh_pad, mh_overlen in zip([0, mh_ddrill], [0, mh_pad], [0, mh_overlen]):
+                makePinHeadStraightShroud(rows, cols, rm, rm, body_width,
+                                    body_overlen,
+                                    body_overlen, ddrill, pad,
+                                    mating_overlen, wall_thickness, notch_width, latch_len, latch_width,
+                                    mh_ddrill, mh_pad, mh_overlen,
+                                    [], "${KISYS3DMOD}/Connector_PinHeader", "PinHeader", "shrouded pin header",
+                                    [0, 0, 0], [1, 1, 1], [0, 0, 0])
