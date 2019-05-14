@@ -363,7 +363,6 @@ def makePinHeadStraightShroud(rows, cols, rm, coldist, package_width, overlen_to
     
     for layer, line_width, lyr_offset, chamfer in zip(layers, line_widths, lyr_offsets, chamfers):
         # body outline
-        #chamfer = min(1, w_fab/4) # limit to 1mm max per KLC
         kicad_modg.append(Line(start=[l_fab + chamfer - lyr_offset, t_fab - lyr_offset], end=[l_fab + w_fab + lyr_offset, t_fab - lyr_offset], layer=layer, width=line_width))
         kicad_modg.append(Line(start=[l_fab + w_fab + lyr_offset, t_fab - lyr_offset], end=[l_fab + w_fab + lyr_offset, t_fab + h_fab + lyr_offset], layer=layer, width=line_width))
         kicad_modg.append(Line(start=[l_fab + w_fab + lyr_offset, t_fab + h_fab + lyr_offset], end=[l_fab - lyr_offset, t_fab + h_fab + lyr_offset], layer=layer, width=line_width))
