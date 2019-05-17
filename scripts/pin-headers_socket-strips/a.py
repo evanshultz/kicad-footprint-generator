@@ -50,8 +50,9 @@ if __name__ == '__main__':
     #latch_lengths = [6.5]
     latch_width=4.4 # large enough to handle all referenced parts
     mh_ddrill=2.69
-    mh_pad=8 # 3M datasheet says 5/16" head
+    mh_pad=[8,8] # 3M datasheet says 5/16" head
     mh_overlen=2.03
+    mh_number='' # can be 'MP' to use symbols with connected mounting holes
 
     cols = 2
     for rows in [5,7,8,10,12,13,15,17,20,25,30,32]:
@@ -61,6 +62,6 @@ if __name__ == '__main__':
                                     body_overlen,
                                     body_overlen, ddrill, pad,
                                     mating_overlen, wall_thickness, notch_width, latch_len, latch_width,
-                                    mh_ddrill, mh_pad, mh_overlen,
+                                    mh_ddrill, mh_pad, mh_overlen, mh_number,
                                     [], "${KISYS3DMOD}/Connector_PinHeader", "PinHeader", "shrouded pin header",
                                     [0, 0, 0], [1, 1, 1], [0, 0, 0])

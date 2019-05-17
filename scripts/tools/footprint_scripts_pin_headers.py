@@ -275,7 +275,7 @@ def makePinHeadStraight(rows, cols, rm, coldist, package_width, overlen_top, ove
 
 def makePinHeadStraightShroud(rows, cols, rm, coldist, package_width, overlen_top, overlen_bottom, ddrill, pad,
                         mating_overlen, wall_thickness, notch_width, latch_len=0, latch_width=0,
-                        mh_ddrill=0, mh_pad=0, mh_overlen=0,
+                        mh_ddrill=0, mh_pad=[0,0], mh_overlen=0, mh_number='',
                         tags_additional=[], lib_name="${{KISYS3DMOD}}/Connector_PinHeader", classname="PinHeader", classname_description="shrouded pin header", offset3d=[0, 0, 0], scale3d=[1, 1, 1],
                         rotate3d=[0, 0, 0]):
     h_fab = (rows - 1) * rm + overlen_top + overlen_bottom
@@ -305,7 +305,7 @@ def makePinHeadStraightShroud(rows, cols, rm, coldist, package_width, overlen_to
     text_size = [text_size,text_size]
     text_t = text_size[0] * 0.15
     
-    mh_present = True if mh_ddrill > 0 and mh_pad > 0 and mh_overlen > 0 else False
+    mh_present = True if mh_ddrill > 0 and mh_pad[0] > 0 and mh_pad[1] > 0 and mh_overlen > 0 else False
     latch_present = True if latch_len > 0 and latch_width > 0 else False
     
     footprint_name_base = "{3}Shroud_{0}x{1:02}_P{2:03.2f}mm{4}_Vertical".format(cols, rows, rm, classname, "_Latch{0:03.1f}mm".format(latch_len) if latch_len > 0 else "")
@@ -346,12 +346,9 @@ def makePinHeadStraightShroud(rows, cols, rm, coldist, package_width, overlen_to
     kicad_mod.append(kicad_modg)
     
     # set general values
-    kicad_modg.append(
-        Text(type='reference', text='REF**', at=[center_fab[0], t_slk - txt_offset - latch_len], layer='F.SilkS'))
-    kicad_modg.append(
-        Text(type='user', text='%R', at=[center_fab[0], center_fab[1]], rotation=90, layer='F.Fab', size=text_size ,thickness=text_t))
-    kicad_modg.append(
-        Text(type='value', text=footprint_name, at=[center_fab[0], t_slk + h_slk + txt_offset + latch_len], layer='F.Fab'))
+    kicad_modg.append(Text(type='reference', text='REF**', at=[center_fab[0], t_slk - txt_offset - latch_len], layer='F.SilkS'))
+    kicad_modg.append(Text(type='user', text='%R', at=[center_fab[0], center_fab[1]], rotation=90, layer='F.Fab', size=text_size, thickness=text_t))
+    kicad_modg.append(Text(type='value', text=footprint_name, at=[center_fab[0], t_slk + h_slk + txt_offset + latch_len], layer='F.Fab'))
     
     # for shrouded headers, fab and silk layers have very similar geometry
     # can use the same code to build lines on both layers with slight changes in values between layers
@@ -363,32 +360,31 @@ def makePinHeadStraightShroud(rows, cols, rm, coldist, package_width, overlen_to
     
     for layer, line_width, lyr_offset, chamfer in zip(layers, line_widths, lyr_offsets, chamfers):
         # body outline
-        kicad_modg.append(Line(start=[l_fab + chamfer - lyr_offset, t_fab - lyr_offset], end=[l_fab + w_fab + lyr_offset, t_fab - lyr_offset], layer=layer, width=line_width))
-        kicad_modg.append(Line(start=[l_fab + w_fab + lyr_offset, t_fab - lyr_offset], end=[l_fab + w_fab + lyr_offset, t_fab + h_fab + lyr_offset], layer=layer, width=line_width))
-        kicad_modg.append(Line(start=[l_fab + w_fab + lyr_offset, t_fab + h_fab + lyr_offset], end=[l_fab - lyr_offset, t_fab + h_fab + lyr_offset], layer=layer, width=line_width))
-        kicad_modg.append(Line(start=[l_fab - lyr_offset, t_fab + h_fab + lyr_offset], end=[l_fab - lyr_offset, t_fab + chamfer - lyr_offset], layer=layer, width=line_width))
+        body_polygon = [{'x':l_fab + chamfer - lyr_offset, 'y':t_fab - lyr_offset}, {'x':l_fab + w_fab + lyr_offset, 'y':t_fab - lyr_offset},
+            {'x':l_fab + w_fab + lyr_offset, 'y':t_fab + h_fab + lyr_offset}, {'x':l_fab - lyr_offset, 'y':t_fab + h_fab + lyr_offset},
+            {'x':l_fab - lyr_offset, 'y':t_fab + chamfer - lyr_offset}]
+        kicad_mod.append(PolygoneLine(polygone=body_polygon, layer=layer, width=line_width))
         if chamfer > 0:
             kicad_modg.append(Line(start=[l_fab, t_fab+chamfer], end=[l_fab + chamfer, t_fab], layer=layer, width=line_width))
         
         # mating connector outline (this is the same for both layers)
-        kicad_modg.append(Line(start=[l_fab - lyr_offset, center_fab[1] - notch_width/2], end=[l_fab + wall_thickness, center_fab[1] - notch_width/2], layer=layer, width=line_width))
-        kicad_modg.append(Line(start=[l_fab + wall_thickness, center_fab[1] - notch_width/2], end=[l_fab + wall_thickness, -mating_overlen], layer=layer, width=line_width))
-        kicad_modg.append(Line(start=[l_fab + wall_thickness, -mating_overlen], end=[l_fab + w_fab - wall_thickness, -mating_overlen], layer=layer, width=line_width))
-        kicad_modg.append(Line(start=[l_fab + w_fab - wall_thickness, -mating_overlen], end=[l_fab + w_fab - wall_thickness, (rows - 1) * rm + mating_overlen], layer=layer, width=line_width))
-        kicad_modg.append(Line(start=[l_fab + w_fab - wall_thickness, (rows - 1) * rm + mating_overlen], end=[l_fab + wall_thickness, (rows - 1) * rm + mating_overlen], layer=layer, width=line_width))
-        kicad_modg.append(Line(start=[l_fab + wall_thickness, (rows - 1) * rm + mating_overlen], end=[l_fab + wall_thickness, center_fab[1] + notch_width/2], layer=layer, width=line_width))
-        kicad_modg.append(Line(start=[l_fab - lyr_offset, center_fab[1] + notch_width/2], end=[l_fab + wall_thickness, center_fab[1] + notch_width/2], layer=layer, width=line_width))
+        mating_conn_polygon = [{'x':l_fab - lyr_offset, 'y':center_fab[1] - notch_width/2}, {'x':l_fab + wall_thickness, 'y':center_fab[1] - notch_width/2},
+            {'x':l_fab + wall_thickness, 'y':-mating_overlen}, {'x':l_fab + w_fab - wall_thickness, 'y':-mating_overlen},
+            {'x':l_fab + w_fab - wall_thickness, 'y':(rows - 1) * rm + mating_overlen}, {'x':l_fab + wall_thickness, 'y':(rows - 1) * rm + mating_overlen},
+            {'x':l_fab + wall_thickness, 'y':center_fab[1] + notch_width/2}, {'x':l_fab + wall_thickness, 'y':center_fab[1] + notch_width/2},
+            {'x':l_fab - lyr_offset, 'y':center_fab[1] + notch_width/2}]
+        kicad_mod.append(PolygoneLine(polygone=mating_conn_polygon, layer=layer, width=line_width))
         
         # latches
         if latch_present:
             # top latch
-            kicad_modg.append(Line(start=[center_fab[0] - latch_width/2 - lyr_offset, t_fab - lyr_offset], end=[center_fab[0] - latch_width/2 - lyr_offset, t_fab - latch_len - lyr_offset], layer=layer, width=line_width))
-            kicad_modg.append(Line(start=[center_fab[0] - latch_width/2 - lyr_offset, t_fab - latch_len - lyr_offset], end=[center_fab[0] + latch_width/2 + lyr_offset, t_fab - latch_len - lyr_offset], layer=layer, width=line_width))
-            kicad_modg.append(Line(start=[center_fab[0] + latch_width/2 + lyr_offset, t_fab - latch_len - lyr_offset], end=[center_fab[0] + latch_width/2 + lyr_offset, t_fab - lyr_offset], layer=layer, width=line_width))
+            latch_top_polygon = [{'x':center_fab[0] - latch_width/2 - lyr_offset, 'y':t_fab - lyr_offset}, {'x':center_fab[0] - latch_width/2 - lyr_offset, 'y':t_fab - latch_len - lyr_offset},
+                {'x':center_fab[0] + latch_width/2 + lyr_offset, 'y':t_fab - latch_len - lyr_offset}, {'x':center_fab[0] + latch_width/2 + lyr_offset, 'y':t_fab - lyr_offset}]
+            kicad_mod.append(PolygoneLine(polygone=latch_top_polygon, layer=layer, width=line_width))
             # bottom latch
-            kicad_modg.append(Line(start=[center_fab[0] - latch_width/2 - lyr_offset, t_fab + h_fab + lyr_offset], end=[center_fab[0] - latch_width/2 - lyr_offset, t_fab + h_fab + latch_len + lyr_offset], layer=layer, width=line_width))
-            kicad_modg.append(Line(start=[center_fab[0] - latch_width/2 - lyr_offset, t_fab + h_fab + latch_len + lyr_offset], end=[center_fab[0] + latch_width/2 + lyr_offset, t_fab + h_fab + latch_len + lyr_offset], layer=layer, width=line_width))
-            kicad_modg.append(Line(start=[center_fab[0] + latch_width/2 + lyr_offset, t_fab + h_fab + latch_len + lyr_offset], end=[center_fab[0] + latch_width/2 + lyr_offset, t_fab + h_fab + lyr_offset], layer=layer, width=line_width))
+            latch_bottom_polygon = [{'x':center_fab[0] - latch_width/2 - lyr_offset, 'y':t_fab + h_fab + lyr_offset}, {'x':center_fab[0] - latch_width/2 - lyr_offset, 'y':t_fab + h_fab + latch_len + lyr_offset},
+                {'x':center_fab[0] + latch_width/2 + lyr_offset, 'y':t_fab + h_fab + latch_len + lyr_offset}, {'x':center_fab[0] + latch_width/2 + lyr_offset, 'y':t_fab + h_fab + lyr_offset}]
+            kicad_mod.append(PolygoneLine(polygone=latch_bottom_polygon, layer=layer, width=line_width))
     
     # silk pin 1 mark (triangle to the left of pin 1)
     slk_mark_height = 1
@@ -402,20 +398,19 @@ def makePinHeadStraightShroud(rows, cols, rm, coldist, package_width, overlen_to
     kicad_mod.append(RectLine(start=[roundCrt(l_crt), roundCrt(t_crt - latch_len)], end=[roundCrt(l_crt + w_crt),
                 roundCrt(t_crt + h_crt + latch_len)], layer='F.CrtYd', width=lw_crt))
     
-    # create pads
-    for start_pos, initial in zip([0, coldist], [1, 2]):
-        kicad_modg.append(PadArray(pincount=rows, spacing=[0,rm], start=[start_pos,0], initial=initial, increment=2,
-            type=Pad.TYPE_THT, shape=Pad.SHAPE_CIRCLE, size=pad, drill=ddrill, layers=Pad.LAYERS_THT))
+    # create pads (first the left row then the right row)
+    for start_pos, initial in zip([0, coldist], range(1, cols + 1)):
+        kicad_modg.append(PadArray(pincount=rows, spacing=[0,rm], start=[start_pos,0], initial=initial, increment=cols,
+            type=Pad.TYPE_THT, shape=Pad.SHAPE_OVAL, size=pad, drill=ddrill, layers=Pad.LAYERS_THT))
     
     # create mounting hole pads
     if mh_present:
         for mh_y in [t_fab + mh_overlen, t_fab + h_fab - mh_overlen]:
-            kicad_modg.append(Pad(number='', type=Pad.TYPE_THT, shape=Pad.SHAPE_CIRCLE, at=[rm/2, mh_y], size=mh_pad,
+            kicad_modg.append(Pad(number=mh_number, type=Pad.TYPE_THT, shape=Pad.SHAPE_OVAL, at=[rm/2, mh_y], size=mh_pad,
                 drill=mh_ddrill, layers=Pad.LAYERS_THT))
     
     # add model (even if there are mounting holes on the footprint do not include that in the 3D model)
-    kicad_modg.append(
-        Model(filename="{0}_{1:03.2f}mm.3dshapes/{2}.wrl".format(lib_name, rm, footprint_name_base), at=offset3d, scale=scale3d, rotate=rotate3d))
+    kicad_modg.append(Model(filename="{0}_{1:03.2f}mm.3dshapes/{2}.wrl".format(lib_name, rm, footprint_name_base), at=offset3d, scale=scale3d, rotate=rotate3d))
     
     # print render tree
     # print(kicad_mod.getRenderTree())
