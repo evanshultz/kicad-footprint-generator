@@ -55,13 +55,31 @@ if __name__ == '__main__':
     mh_number='' # can be 'MP' to use symbols with connected mounting holes
 
     cols = 2
-    for rows in [5,7,8,10,12,13,15,17,20,25,30,32]:
+    for rows in [5,6,7,8,10,12,13,15,17,20,25,30,32]:
         for latch_len in latch_lengths:
             for mh_ddrill, mh_pad, mh_overlen in zip([0, mh_ddrill], [0, mh_pad], [0, mh_overlen]):
-                makePinHeadStraightShroud(rows, cols, rm, rm, body_width,
-                                    body_overlen,
-                                    body_overlen, ddrill, pad,
+                makeIdcHeaderVertical(rows, cols, rm, rm, body_width,
+                                    body_overlen, body_overlen, ddrill, pad,
                                     mating_overlen, wall_thickness, notch_width, latch_len, latch_width,
                                     mh_ddrill, mh_pad, mh_overlen, mh_number,
-                                    [], "${KISYS3DMOD}/Connector_PinHeader", "PinHeader", "shrouded pin header",
+                                    [], "${KISYS3DMOD}/Connector_IDC", "IDC-Header", "IDC header",
                                     [0, 0, 0], [1, 1, 1], [0, 0, 0])
+    
+    # common settings
+    # from http://multimedia.3m.com/mws/media/330367O/3m-four-wall-header-2500-series-ts-0770.pdf
+    # and  https://www.te.com/commerce/DocumentDelivery/DDEController?Action=srchrtrv&DocNm=1761681&DocType=Customer+Drawing&DocLang=English
+    # and  https://cdn.amphenol-icc.com/media/wysiwyg/files/drawing/75869.pdf
+    # and  https://katalog.we-online.de/em/datasheet/6120xx21621.pdf
+    # and  https://docs.google.com/spreadsheets/d/16SsEcesNF15N3Lb4niX7dcUr-NY5_MFPQhobNuNppn4/edit#gid=0
+    
+    body_width=8.9
+    body_overlen=5.1
+    mating_overlen=3.91
+    
+    for rows in [3,4,5,6,7,8,10,12,13,15,17,20,25,30,32]:
+        makeIdcHeaderVertical(rows, cols, rm, rm, body_width,
+                            body_overlen, body_overlen, ddrill, pad,
+                            mating_overlen, wall_thickness, notch_width, 0, 0,
+                            0, 0, 0, 0,
+                            [], "${KISYS3DMOD}/Connector_IDC", "IDC-Header", "IDC box header",
+                            [0, 0, 0], [1, 1, 1], [0, 0, 0])

@@ -273,10 +273,10 @@ def makePinHeadStraight(rows, cols, rm, coldist, package_width, overlen_top, ove
     file_handler.writeFile(footprint_name + '.kicad_mod')
 
 
-def makePinHeadStraightShroud(rows, cols, rm, coldist, package_width, overlen_top, overlen_bottom, ddrill, pad,
+def makeIdcHeaderVertical(rows, cols, rm, coldist, package_width, overlen_top, overlen_bottom, ddrill, pad,
                         mating_overlen, wall_thickness, notch_width, latch_len=0, latch_width=0,
                         mh_ddrill=0, mh_pad=[0,0], mh_overlen=0, mh_number='',
-                        tags_additional=[], lib_name="${{KISYS3DMOD}}/Connector_PinHeader", classname="PinHeader", classname_description="shrouded pin header", offset3d=[0, 0, 0], scale3d=[1, 1, 1],
+                        tags_additional=[], lib_name="${{KISYS3DMOD}}/Connector_IDC", classname="IDC-Header", classname_description="IDC box header", offset3d=[0, 0, 0], scale3d=[1, 1, 1],
                         rotate3d=[0, 0, 0]):
     h_fab = (rows - 1) * rm + overlen_top + overlen_bottom
     w_fab = package_width
@@ -308,7 +308,7 @@ def makePinHeadStraightShroud(rows, cols, rm, coldist, package_width, overlen_to
     mh_present = True if mh_ddrill > 0 and mh_pad[0] > 0 and mh_pad[1] > 0 and mh_overlen > 0 else False
     latch_present = True if latch_len > 0 and latch_width > 0 else False
     
-    footprint_name_base = "{3}Shroud_{0}x{1:02}_P{2:03.2f}mm{4}_Vertical".format(cols, rows, rm, classname, "_Latch{0:03.1f}mm".format(latch_len) if latch_len > 0 else "")
+    footprint_name_base = "{3}_{0}x{1:02}_P{2:03.2f}mm{4}_Vertical".format(cols, rows, rm, classname, "_Latch{0:03.1f}mm".format(latch_len) if latch_len > 0 else "")
     
     footprint_name = footprint_name_base + "_MountingHole" if mh_present else footprint_name_base
     
