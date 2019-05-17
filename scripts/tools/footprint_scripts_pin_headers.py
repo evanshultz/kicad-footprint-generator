@@ -352,13 +352,8 @@ def makePinHeadStraightShroud(rows, cols, rm, coldist, package_width, overlen_to
     
     # for shrouded headers, fab and silk layers have very similar geometry
     # can use the same code to build lines on both layers with slight changes in values between layers
-    # these lists capture fab and then silk layer settings so the same code can draw elements for both layers
-    layers = ['F.Fab', 'F.SilkS']
-    line_widths = [lw_fab, lw_slk]
-    lyr_offsets = [0, slk_offset]
-    chamfers = [min(1, w_fab / 4), 0] # limit to 1mm max per KLC
-    
-    for layer, line_width, lyr_offset, chamfer in zip(layers, line_widths, lyr_offsets, chamfers):
+    # zip together lists with fab and then silk layer settings as the list elements so the same code can draw both layers
+    for layer, line_width, lyr_offset, chamfer in zip(['F.Fab', 'F.SilkS'], [lw_fab, lw_slk], [0, slk_offset], [min(1, w_fab / 4), 0]):
         # body outline
         body_polygon = [{'x':l_fab + chamfer - lyr_offset, 'y':t_fab - lyr_offset}, {'x':l_fab + w_fab + lyr_offset, 'y':t_fab - lyr_offset},
             {'x':l_fab + w_fab + lyr_offset, 'y':t_fab + h_fab + lyr_offset}, {'x':l_fab - lyr_offset, 'y':t_fab + h_fab + lyr_offset},
