@@ -42,6 +42,7 @@ if __name__ == '__main__':
     dual_pad_smd=[3.15,1.0]
     
     orientation='Vertical'
+    latching = True
     body_width=8.8
     body_overlen=10.97
     body_offset=0
@@ -64,7 +65,7 @@ if __name__ == '__main__':
                                     body_overlen, body_overlen, body_offset,
                                     ddrill, pad,
                                     mating_overlen, wall_thickness, notch_width,
-                                    orientation,
+                                    orientation, latching,
                                     latch_len, latch_width,
                                     mh_ddrill, mh_pad, mh_overlen, mh_offset, mh_number,
                                     [], "${KISYS3DMOD}/Connector_IDC", "IDC-Header", "IDC header",
@@ -78,6 +79,7 @@ if __name__ == '__main__':
     # and  https://docs.google.com/spreadsheets/d/16SsEcesNF15N3Lb4niX7dcUr-NY5_MFPQhobNuNppn4/edit#gid=0
     
     orientation='Vertical'
+    latching = False
     has_latch=False
     body_width=8.9
     body_overlen=5.1
@@ -88,7 +90,7 @@ if __name__ == '__main__':
                             body_overlen, body_overlen, body_offset,
                             ddrill, pad,
                             mating_overlen, wall_thickness, notch_width,
-                            orientation,
+                            orientation, latching,
                             0, 0,
                             0, 0, 0, 0, 0,
                             [], "${KISYS3DMOD}/Connector_IDC", "IDC-Header", "IDC box header",
@@ -110,7 +112,7 @@ if __name__ == '__main__':
                             body_overlen, body_overlen, body_offset,
                             ddrill, pad,
                             mating_overlen, wall_thickness, notch_width,
-                            orientation,
+                            orientation, latching,
                             0, 0,
                             0, 0, 0, 0, 0,
                             [], "${KISYS3DMOD}/Connector_IDC", "IDC-Header", "IDC box header",

@@ -276,7 +276,7 @@ def makePinHeadStraight(rows, cols, rm, coldist, package_width, overlen_top, ove
 
 def makeIdcHeader(rows, cols, rm, coldist, body_width, overlen_top, overlen_bottom, body_offset, ddrill, pad,
                         mating_overlen, wall_thickness, notch_width,
-                        orientation,
+                        orientation, latching,
                         latch_len=0, latch_width=0,
                         mh_ddrill=0, mh_pad=[0,0], mh_overlen=0, mh_offset=0, mh_number='',
                         tags_additional=[], lib_name="${{KISYS3DMOD}}/Connector_IDC", classname="IDC-Header", classname_description="IDC box header", offset3d=[0, 0, 0], scale3d=[1, 1, 1],
@@ -313,26 +313,24 @@ def makeIdcHeader(rows, cols, rm, coldist, body_width, overlen_top, overlen_bott
     text_t = text_size[0] * 0.15
     
     mh_present = True if mh_ddrill > 0 and mh_pad[0] > 0 and mh_pad[1] > 0 and mh_overlen > 0 else False
-    latch_present = True if latch_len > 0 and latch_width > 0 else False
     
-    footprint_name_base = "{3}_{0}x{1:02}_P{2:03.2f}mm{4}_{5}".format(cols, rows, rm, classname, "_Latch{0:03.1f}mm".format(latch_len) if latch_len > 0 else "", orientation)
-    
+    footprint_name_base = "{3}_{0}x{1:02}_P{2:03.2f}mm{4}{5}_{6}".format(cols, rows, rm, classname, "_Latch" if latching else "", "{0:03.1f}mm".format(latch_len) if latch_len > 0 else "", orientation)
     footprint_name = footprint_name_base + "_MountingHole" if mh_present else footprint_name_base
     
-    if (cols == 1):
+    if cols == 1:
         description_rows = "single row"
         tags_rows = "single row"
-    elif (cols == 2):
+    elif cols == 2:
         description_rows = "double rows"
         tags_rows = "double row"
-    elif (cols == 3):
+    elif cols == 3:
         description_rows = "triple rows"
         tags_rows = "triple row"
-    elif (cols == 4):
+    elif cols == 4:
         description_rows = "quadruple rows"
         tags_rows = "quadruple row"
     
-    description = "Through hole {7} {3}, {0}x{1:02}, {2:03.2f}mm pitch, {4}{5}{6}".format(cols, rows, rm, classname_description, description_rows, ", {0:03.1f}mm latch length".format(latch_len) if latch_present else "", ", mounting holes" if mh_present else "", orientation.lower())
+    description = "Through hole {7} {3}, {0}x{1:02}, {2:03.2f}mm pitch, {4}{5}{6}{7}".format(cols, rows, rm, classname_description, description_rows, ", {0:03.1f}mm".format(latch_len) if latch_len > 0 else "", " latches" if latching else "", ", mounting holes" if mh_present else "", orientation.lower())
     tags = "Through hole {5} {3} THT {0}x{1:02} {2:03.2f}mm {4}".format(cols, rows, rm, classname_description, tags_rows, orientation.lower())
     
     if (len(tags_additional) > 0):
@@ -377,12 +375,12 @@ def makeIdcHeader(rows, cols, rm, coldist, body_width, overlen_top, overlen_bott
                 {'x':l_fab + wall_thickness, 'y':center_fab[1] + notch_width/2}, {'x':l_fab + wall_thickness, 'y':center_fab[1] + notch_width/2},
                 {'x':l_fab - lyr_offset, 'y':center_fab[1] + notch_width/2}]
             kicad_mod.append(PolygoneLine(polygone=mating_conn_polygon, layer=layer, width=line_width))
-        if orientation == 'Horizontal' and not latch_present:
+        if orientation == 'Horizontal' and not latching:
             kicad_modg.append(Line(start=[body_offset - lyr_offset, center_fab[1] - notch_width / 2], end=[l_fab + w_fab + lyr_offset, center_fab[1] - notch_width / 2], layer=layer, width=line_width))
             kicad_modg.append(Line(start=[body_offset - lyr_offset, center_fab[1] + notch_width / 2], end=[l_fab + w_fab + lyr_offset, center_fab[1] + notch_width / 2], layer=layer, width=line_width))
         
         # vertical latches (horizontal latches are integrated into the body outline)
-        if latch_present and orientation == 'Vertical':
+        if latching and orientation == 'Vertical':
             # top latch
             latch_top_polygon = [{'x':center_fab[0] - latch_width/2 - lyr_offset, 'y':t_fab - lyr_offset}, {'x':center_fab[0] - latch_width/2 - lyr_offset, 'y':t_fab - latch_len - lyr_offset},
                 {'x':center_fab[0] + latch_width/2 + lyr_offset, 'y':t_fab - latch_len - lyr_offset}, {'x':center_fab[0] + latch_width/2 + lyr_offset, 'y':t_fab - lyr_offset}]
