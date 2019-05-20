@@ -19,7 +19,7 @@ from footprint_scripts_pin_headers import *  # NOQA
 
 if __name__ == '__main__':
     # common settings
-    # from https://multimedia.3m.com/mws/media/22268O/3mtm-100-in-4-wll-hdr-100x-100l-e-strt-cmpl-pin-ts0478.pdf
+    # from http://multimedia.3m.com/mws/media/22448O/3m-four-wall-header-3000-series-100-x-100-ts-0772.pdf
     # and  http://www.selecom.it/pdf/06din416.pdf
     # and  https://www.reboul.fr/storage/00003af6.pdf
     # and  http://www.oupiin.com/product_iii.html?c1=10&c2=54
@@ -50,17 +50,17 @@ if __name__ == '__main__':
     wall_thickness=1.2
     notch_width=4.1
     latch_lengths = [0,6.5,9.5,12] # these values roughly represent the referenced parts with the latch open
-    latch_width=4.4 # large enough to handle all referenced parts
+    latch_width=4.4 # large enough to handle all referenced parts and measured empirically
     mh_ddrill=2.69
     mh_pad=[8,8] # 3M datasheet says 5/16" head
-    mh_overlen=2.03
-    mh_offset=rm/2
+    mh_overlen=8.94
+    mh_offset=1.02
     mh_number='' # can be 'MP' to have connected mounting holes
 
     cols = 2
     for rows in [5,6,7,8,10,12,13,15,17,20,25,30,32]:
         for latch_len in latch_lengths:
-            for mh_ddrill, mh_pad, mh_overlen in zip([0, mh_ddrill], [0, mh_pad], [0, mh_overlen]):
+            for mh_ddrill, mh_pad, mh_overlen in zip([0, mh_ddrill], [[0,0], mh_pad], [0, mh_overlen]):
                 makeIdcHeader(rows, cols, rm, rm, body_width,
                                     body_overlen, body_overlen, body_offset,
                                     ddrill, pad,
@@ -70,6 +70,29 @@ if __name__ == '__main__':
                                     mh_ddrill, mh_pad, mh_overlen, mh_offset, mh_number,
                                     [], "${KISYS3DMOD}/Connector_IDC", "IDC-Header", "IDC header",
                                     [0, 0, 0], [1, 1, 1], [0, 0, 0])
+    
+    # the above datasheets cover both horizontal and vertical
+    # latches are assumed to hang off the PCB so they aren't included here
+    # for this footprint the body outline is hard-coded into the script
+    orientation='Horizontal'
+    body_width=1.24+15.88
+    body_offset=-1.24
+    latch_len=0
+    mh_overlen=5.905
+    mh_offset=1.8
+    
+    for rows in [5,6,7,8,10,12,13,15,17,20,25,30,32]:
+        for mh_ddrill, mh_pad, mh_overlen in zip([0, mh_ddrill], [[0,0], mh_pad], [0, mh_overlen]):
+            makeIdcHeader(rows, cols, rm, rm, body_width,
+                                body_overlen, body_overlen, body_offset,
+                                ddrill, pad,
+                                mating_overlen, wall_thickness, notch_width,
+                                orientation, latching,
+                                latch_len, latch_width,
+                                mh_ddrill, mh_pad, mh_overlen, mh_offset, mh_number,
+                                [], "${KISYS3DMOD}/Connector_IDC", "IDC-Header", "IDC header",
+                                [0, 0, 0], [1, 1, 1], [0, 0, 0])
+
     
     # common settings
     # from http://multimedia.3m.com/mws/media/330367O/3m-four-wall-header-2500-series-ts-0770.pdf
@@ -83,6 +106,7 @@ if __name__ == '__main__':
     has_latch=False
     body_width=8.9
     body_overlen=5.1
+    body_offset=0
     mating_overlen=3.91
     
     for rows in [3,4,5,6,7,8,10,12,13,15,17,20,25,30,32]:
@@ -92,7 +116,7 @@ if __name__ == '__main__':
                             mating_overlen, wall_thickness, notch_width,
                             orientation, latching,
                             0, 0,
-                            0, 0, 0, 0, 0,
+                            0, [0,0], 0, 0, 0,
                             [], "${KISYS3DMOD}/Connector_IDC", "IDC-Header", "IDC box header",
                             [0, 0, 0], [1, 1, 1], [0, 0, 0])
 
@@ -114,6 +138,6 @@ if __name__ == '__main__':
                             mating_overlen, wall_thickness, notch_width,
                             orientation, latching,
                             0, 0,
-                            0, 0, 0, 0, 0,
+                            0, [0,0], 0, 0, 0,
                             [], "${KISYS3DMOD}/Connector_IDC", "IDC-Header", "IDC box header",
                             [0, 0, 0], [1, 1, 1], [0, 0, 0])

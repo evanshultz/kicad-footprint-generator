@@ -293,10 +293,14 @@ def makeIdcHeader(rows, cols, rm, coldist, body_width, overlen_top, overlen_bott
     l_slk = (coldist * (cols - 1) - w_slk) / 2 if body_offset == 0 else body_offset
     t_slk = -overlen_top - slk_offset
     
-    h_crt = max(h_fab, (rows - 1) * rm + pad[1]) + 2 * latch_len + 2 * crt_offset
-    w_crt = max(body_width, coldist * (cols - 1) + pad[0]) + 2 * crt_offset if body_offset == 0 else pad[0] / 2 + body_offset + body_width + 2 * crt_offset
-    l_crt = coldist * (cols - 1) / 2 - w_crt / 2 if body_offset == 0 else -pad[0] / 2 - crt_offset
-    t_crt = t_fab - latch_len - crt_offset
+    h_crt = max(max(h_fab, (rows - 1) * rm + pad[1]) + 2 * latch_len, (rows - 1) * rm + 2 * mh_overlen + mh_pad[1]) + 2 * crt_offset
+    w_crt = max(body_width, coldist * (cols - 1) + pad[0]) + 2 * crt_offset if body_offset <= 0 else pad[0] / 2 + body_offset + body_width + 2 * crt_offset
+    l_crt = l_fab - crt_offset if body_offset <= 0 else -pad[0] / 2 - crt_offset
+    t_crt = min(t_fab - latch_len, -mh_overlen - mh_pad[1] / 2) - crt_offset
+    if orientation == 'Horizontal' and latching and mh_ddrill > 0:
+        # horizontal latching with mounting holes is such a special case that it gets a special clause
+        l_crt = mh_offset - mh_pad[0] / 2 - crt_offset
+        w_crt = -l_crt + body_width + body_offset + crt_offset
     
     # center of the body (horizontal: middle pin or the center of the middle pins for vertical)
     center_fab = [coldist * (cols - 1) / 2 if orientation == 'Vertical' else body_offset + body_width / 2, t_fab + h_fab / 2]
@@ -360,11 +364,20 @@ def makeIdcHeader(rows, cols, rm, coldist, body_width, overlen_top, overlen_bott
     # zip together lists with fab and then silk layer settings as the list elements so the same code can draw both layers
     for layer, line_width, lyr_offset, chamfer in zip(['F.Fab', 'F.SilkS'], [lw_fab, lw_slk], [0, slk_offset], [min(1, w_fab / 4), 0]):
         # body outline
-        body_polygon = [{'x':l_fab + chamfer - lyr_offset, 'y':t_fab - lyr_offset}, {'x':l_fab + w_fab + lyr_offset, 'y':t_fab - lyr_offset},
-            {'x':l_fab + w_fab + lyr_offset, 'y':t_fab + h_fab + lyr_offset}, {'x':l_fab - lyr_offset, 'y':t_fab + h_fab + lyr_offset},
-            {'x':l_fab - lyr_offset, 'y':t_fab + chamfer - lyr_offset}]
+        if orientation == 'Horizontal' and latching:
+            # no detailed drawing available so magic numbers were modified from the existing KiCad footprint
+            body_polygon = [{'x':body_offset - lyr_offset, 'y':t_fab - lyr_offset}, {'x':l_fab + 6.98 + lyr_offset, 'y':t_fab - lyr_offset},
+                {'x':l_fab + w_fab + lyr_offset, 'y':t_fab + 3.17 - lyr_offset}, {'x':l_fab + w_fab + lyr_offset, 'y':t_fab + 6.99 + lyr_offset},
+                {'x':l_fab + 12.7 + lyr_offset, 'y':t_fab + 9.14 + lyr_offset}, {'x':l_fab + 12.7 + lyr_offset, 'y':t_fab + h_fab - 9.14 - lyr_offset},
+                {'x':l_fab + w_fab + lyr_offset, 'y':t_fab + h_fab - 6.99 - lyr_offset}, {'x':l_fab + w_fab + lyr_offset, 'y':t_fab + h_fab - 3.17 + lyr_offset},
+                {'x':l_fab + 6.98 + lyr_offset, 'y':t_fab + h_fab + lyr_offset}, {'x':body_offset - lyr_offset, 'y':t_fab + h_fab + lyr_offset},
+                {'x':body_offset - lyr_offset, 'y':t_fab - lyr_offset}]
+        else:
+            body_polygon = [{'x':l_fab + chamfer - lyr_offset, 'y':t_fab - lyr_offset}, {'x':l_fab + w_fab + lyr_offset, 'y':t_fab - lyr_offset},
+                {'x':l_fab + w_fab + lyr_offset, 'y':t_fab + h_fab + lyr_offset}, {'x':l_fab - lyr_offset, 'y':t_fab + h_fab + lyr_offset},
+                {'x':l_fab - lyr_offset, 'y':t_fab + chamfer - lyr_offset}]
         kicad_mod.append(PolygoneLine(polygone=body_polygon, layer=layer, width=line_width))
-        if chamfer > 0:
+        if chamfer > 0 and not (orientation == 'Horizontal' and latching):
             kicad_modg.append(Line(start=[l_fab, t_fab + chamfer], end=[l_fab + chamfer, t_fab], layer=layer, width=line_width))
         
         # vertical mating connector outline (this is the same for both layers)
@@ -375,12 +388,14 @@ def makeIdcHeader(rows, cols, rm, coldist, body_width, overlen_top, overlen_bott
                 {'x':l_fab + wall_thickness, 'y':center_fab[1] + notch_width/2}, {'x':l_fab + wall_thickness, 'y':center_fab[1] + notch_width/2},
                 {'x':l_fab - lyr_offset, 'y':center_fab[1] + notch_width/2}]
             kicad_mod.append(PolygoneLine(polygone=mating_conn_polygon, layer=layer, width=line_width))
+        
+        # horizontal mating connector 'notch' lines
         if orientation == 'Horizontal' and not latching:
             kicad_modg.append(Line(start=[body_offset - lyr_offset, center_fab[1] - notch_width / 2], end=[l_fab + w_fab + lyr_offset, center_fab[1] - notch_width / 2], layer=layer, width=line_width))
             kicad_modg.append(Line(start=[body_offset - lyr_offset, center_fab[1] + notch_width / 2], end=[l_fab + w_fab + lyr_offset, center_fab[1] + notch_width / 2], layer=layer, width=line_width))
         
-        # vertical latches (horizontal latches are integrated into the body outline)
-        if latching and orientation == 'Vertical':
+        # vertical latches (horizontal latches are off the PCB and not shown)
+        if orientation == 'Vertical' and latching:
             # top latch
             latch_top_polygon = [{'x':center_fab[0] - latch_width/2 - lyr_offset, 'y':t_fab - lyr_offset}, {'x':center_fab[0] - latch_width/2 - lyr_offset, 'y':t_fab - latch_len - lyr_offset},
                 {'x':center_fab[0] + latch_width/2 + lyr_offset, 'y':t_fab - latch_len - lyr_offset}, {'x':center_fab[0] + latch_width/2 + lyr_offset, 'y':t_fab - lyr_offset}]
@@ -391,22 +406,22 @@ def makeIdcHeader(rows, cols, rm, coldist, body_width, overlen_top, overlen_bott
             kicad_mod.append(PolygoneLine(polygone=latch_bottom_polygon, layer=layer, width=line_width))
     
     # horizontal pin outlines
-    if orientation == 'Horizontal':
+    if orientation == 'Horizontal' and not latching:
         for row in range(rows):
-            horiz_pin_poly = [{'x':body_offset, 'y':rm * row - pin_size / 2}, {'x':-pin_size / 2, 'y':rm * row - pin_size / 2},
+            horiz_pin_polygon = [{'x':body_offset, 'y':rm * row - pin_size / 2}, {'x':-pin_size / 2, 'y':rm * row - pin_size / 2},
                 {'x':-pin_size / 2, 'y':rm * row + pin_size / 2}, {'x':body_offset, 'y':rm * row + pin_size / 2}]
-            kicad_modg.append(PolygoneLine(polygone=horiz_pin_poly, layer='F.Fab', width=lw_fab))
+            kicad_modg.append(PolygoneLine(polygone=horiz_pin_polygon, layer='F.Fab', width=lw_fab))
     
     # silk pin 1 mark (triangle to the left of pin 1 for horizontal or above pin 1 for vertical)
     slk_mark_height = 1
     slk_mark_width = 1
     slk_mark_offset = 0.5
-    if orientation == 'Vertical':
-        slk_polygon = [{'x':l_fab - slk_mark_offset, 'y':0}, {'x':l_fab - slk_mark_offset - slk_mark_width, 'y':-slk_mark_height / 2},
-            {'x':l_fab - slk_mark_offset - slk_mark_width, 'y':slk_mark_height / 2}, {'x':l_fab - slk_mark_offset, 'y':0}]
-    elif orientation == 'Horizontal':
+    if orientation == 'Horizontal' and not latching:
         slk_polygon = [{'x':0, 'y':-pad[1] / 2 - slk_mark_offset}, {'x':-slk_mark_width / 2, 'y':-pad[1] / 2 - slk_mark_offset - slk_mark_height},
             {'x':slk_mark_width / 2, 'y':-pad[1] / 2 - slk_mark_offset - slk_mark_height}, {'x':0, 'y':-pad[1] / 2 - slk_mark_offset}]
+    else:
+        slk_polygon = [{'x':l_fab - slk_mark_offset, 'y':0}, {'x':l_fab - slk_mark_offset - slk_mark_width, 'y':-slk_mark_height / 2},
+            {'x':l_fab - slk_mark_offset - slk_mark_width, 'y':slk_mark_height / 2}, {'x':l_fab - slk_mark_offset, 'y':0}]
     kicad_mod.append(PolygoneLine(polygone=slk_polygon, layer='F.SilkS', width=lw_slk))
     
     # create courtyard
@@ -420,7 +435,7 @@ def makeIdcHeader(rows, cols, rm, coldist, body_width, overlen_top, overlen_bott
     
     # create mounting hole pads
     if mh_present:
-        for mh_y in [t_fab + mh_overlen, t_fab + h_fab - mh_overlen]:
+        for mh_y in [-mh_overlen, (rows - 1) * rm + mh_overlen]:
             kicad_modg.append(Pad(number=mh_number, type=Pad.TYPE_THT, shape=Pad.SHAPE_OVAL, at=[mh_offset, mh_y], size=mh_pad,
                 drill=mh_ddrill, layers=Pad.LAYERS_THT))
     
