@@ -283,6 +283,8 @@ def makeIdcHeader(rows, cols, rm, coldist, body_width, overlen_top, overlen_bott
                         rotate3d=[0, 0, 0]):
     pin_size = 0.64 # square pin side length; this appears to be the same for all connectors so use a fixed internal value
     
+    mh_present = True if mh_ddrill > 0 and mh_pad[0] > 0 and mh_pad[1] > 0 and mh_overlen > 0 else False
+    
     h_fab = (rows - 1) * rm + overlen_top + overlen_bottom
     w_fab = body_width
     l_fab = (coldist * (cols - 1) - w_fab) / 2 if body_offset == 0 else body_offset
@@ -293,12 +295,14 @@ def makeIdcHeader(rows, cols, rm, coldist, body_width, overlen_top, overlen_bott
     l_slk = (coldist * (cols - 1) - w_slk) / 2 if body_offset == 0 else body_offset
     t_slk = -overlen_top - slk_offset
     
+    # these calculations are so tight that new body styles will probably break them
     h_crt = max(max(h_fab, (rows - 1) * rm + pad[1]) + 2 * latch_len, (rows - 1) * rm + 2 * mh_overlen + mh_pad[1]) + 2 * crt_offset
     w_crt = max(body_width, coldist * (cols - 1) + pad[0]) + 2 * crt_offset if body_offset <= 0 else pad[0] / 2 + body_offset + body_width + 2 * crt_offset
     l_crt = l_fab - crt_offset if body_offset <= 0 else -pad[0] / 2 - crt_offset
     t_crt = min(t_fab - latch_len, -mh_overlen - mh_pad[1] / 2) - crt_offset
-    if orientation == 'Horizontal' and latching and mh_ddrill > 0:
-        # horizontal latching with mounting holes is such a special case that it gets a special clause
+    #if orientation == 'Horizontal' and latching and mh_ddrill > 0:
+    if mh_present and (mh_offset - mh_pad[0] / 2 < l_fab):
+        # horizontal latching with mounting holes is a special case
         l_crt = mh_offset - mh_pad[0] / 2 - crt_offset
         w_crt = -l_crt + body_width + body_offset + crt_offset
     
@@ -315,8 +319,6 @@ def makeIdcHeader(rows, cols, rm, coldist, body_width, overlen_top, overlen_bott
     text_size = round(text_size, 2)
     text_size = [text_size,text_size]
     text_t = text_size[0] * 0.15
-    
-    mh_present = True if mh_ddrill > 0 and mh_pad[0] > 0 and mh_pad[1] > 0 and mh_overlen > 0 else False
     
     footprint_name_base = "{3}_{0}x{1:02}_P{2:03.2f}mm{4}{5}_{6}".format(cols, rows, rm, classname, "_Latch" if latching else "", "{0:03.1f}mm".format(latch_len) if latch_len > 0 else "", orientation)
     footprint_name = footprint_name_base + "_MountingHole" if mh_present else footprint_name_base
@@ -405,8 +407,9 @@ def makeIdcHeader(rows, cols, rm, coldist, body_width, overlen_top, overlen_bott
                 {'x':center_fab[0] + latch_width/2 + lyr_offset, 'y':t_fab + h_fab + latch_len + lyr_offset}, {'x':center_fab[0] + latch_width/2 + lyr_offset, 'y':t_fab + h_fab + lyr_offset}]
             kicad_mod.append(PolygoneLine(polygone=latch_bottom_polygon, layer=layer, width=line_width))
     
-    # horizontal pin outlines
-    if orientation == 'Horizontal' and not latching:
+    # horizontal pin outlines (only applies if the body is right of the leftmost pin row)
+    #if orientation == 'Horizontal' and not latching:
+    if body_offset > 0:
         for row in range(rows):
             horiz_pin_polygon = [{'x':body_offset, 'y':rm * row - pin_size / 2}, {'x':-pin_size / 2, 'y':rm * row - pin_size / 2},
                 {'x':-pin_size / 2, 'y':rm * row + pin_size / 2}, {'x':body_offset, 'y':rm * row + pin_size / 2}]
