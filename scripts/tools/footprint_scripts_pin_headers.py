@@ -352,8 +352,8 @@ def makeIdcHeader(rows, cols, rm, coldist, body_width, overlen_top, overlen_bott
     kicad_mod.setDescription(description)
     kicad_mod.setTags(tags)
     
-    # anchor for SMD-symbols is in the center, for THT-symbols at pin1
-    kicad_modg = Translation(0, 0)
+    # instantiate footprint (SMD origin at center, THT at pin 1)
+    kicad_modg = Footprint(footprint_name)
     kicad_mod.append(kicad_modg)
     
     # set general values
