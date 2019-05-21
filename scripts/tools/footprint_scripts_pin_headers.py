@@ -415,16 +415,12 @@ def makeIdcHeader(rows, cols, rm, coldist, body_width, overlen_top, overlen_bott
                 {'x':-pin_size / 2, 'y':rm * row + pin_size / 2}, {'x':body_offset, 'y':rm * row + pin_size / 2}]
             kicad_modg.append(PolygoneLine(polygone=horiz_pin_polygon, layer='F.Fab', width=lw_fab))
     
-    # silk pin 1 mark (triangle to the left of pin 1 for horizontal or above pin 1 for vertical)
+    # silk pin 1 mark (triangle to the left of pin 1)
     slk_mark_height = 1
     slk_mark_width = 1
-    slk_mark_offset = 0.5
-    if orientation == 'Horizontal' and not latching:
-        slk_polygon = [{'x':0, 'y':-pad[1] / 2 - slk_mark_offset}, {'x':-slk_mark_width / 2, 'y':-pad[1] / 2 - slk_mark_offset - slk_mark_height},
-            {'x':slk_mark_width / 2, 'y':-pad[1] / 2 - slk_mark_offset - slk_mark_height}, {'x':0, 'y':-pad[1] / 2 - slk_mark_offset}]
-    else:
-        slk_polygon = [{'x':l_fab - slk_mark_offset, 'y':0}, {'x':l_fab - slk_mark_offset - slk_mark_width, 'y':-slk_mark_height / 2},
-            {'x':l_fab - slk_mark_offset - slk_mark_width, 'y':slk_mark_height / 2}, {'x':l_fab - slk_mark_offset, 'y':0}]
+    slk_mark_tip = min(l_fab, -pad[0] / 2) - 0.5 # offset 0.5mm from pin 1 or the body
+    slk_polygon = [{'x':slk_mark_tip, 'y':0}, {'x':slk_mark_tip - slk_mark_width, 'y':-slk_mark_height / 2},
+        {'x':slk_mark_tip - slk_mark_width, 'y':slk_mark_height / 2}, {'x':slk_mark_tip, 'y':0}]
     kicad_mod.append(PolygoneLine(polygone=slk_polygon, layer='F.SilkS', width=lw_slk))
     
     # create courtyard
