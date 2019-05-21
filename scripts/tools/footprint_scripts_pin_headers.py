@@ -367,13 +367,22 @@ def makeIdcHeader(rows, cols, rm, coldist, body_width, overlen_top, overlen_bott
     for layer, line_width, lyr_offset, chamfer in zip(['F.Fab', 'F.SilkS'], [lw_fab, lw_slk], [0, slk_offset], [min(1, w_fab / 4), 0]):
         # body outline
         if orientation == 'Horizontal' and latching:
-            # no detailed drawing available so magic numbers were modified from the existing KiCad footprint
+            # no detailed drawing available
+            # magic numbers taken from existing KiCad footprints
             body_polygon = [{'x':body_offset - lyr_offset, 'y':t_fab - lyr_offset}, {'x':l_fab + 6.98 + lyr_offset, 'y':t_fab - lyr_offset},
                 {'x':l_fab + w_fab + lyr_offset, 'y':t_fab + 3.17 - lyr_offset}, {'x':l_fab + w_fab + lyr_offset, 'y':t_fab + 6.99 + lyr_offset},
                 {'x':l_fab + 12.7 + lyr_offset, 'y':t_fab + 9.14 + lyr_offset}, {'x':l_fab + 12.7 + lyr_offset, 'y':t_fab + h_fab - 9.14 - lyr_offset},
                 {'x':l_fab + w_fab + lyr_offset, 'y':t_fab + h_fab - 6.99 - lyr_offset}, {'x':l_fab + w_fab + lyr_offset, 'y':t_fab + h_fab - 3.17 + lyr_offset},
                 {'x':l_fab + 6.98 + lyr_offset, 'y':t_fab + h_fab + lyr_offset}, {'x':body_offset - lyr_offset, 'y':t_fab + h_fab + lyr_offset},
                 {'x':body_offset - lyr_offset, 'y':t_fab - lyr_offset}]
+            # magic numbers taken from simplified 3M 3000 model (also modify arguments: body_offset=-1.24 and body_width=1.24+15.53)
+            # https://www.3m.com/3M/en_US/company-us/all-3m-products/~/3M-Four-Wall-Header-3000-Series/?N=5002385+3290316872&preselect=8709318+8710652+8733900+8734573&rt=rud
+            #body_polygon = [{'x':body_offset - lyr_offset, 'y':t_fab - lyr_offset}, {'x':l_fab + 7.11 + lyr_offset, 'y':t_fab - lyr_offset},
+                #{'x':l_fab + 16.77 + lyr_offset, 'y':t_fab + 3.47 - lyr_offset}, {'x':l_fab + 16.77 + lyr_offset, 'y':t_fab + 7.44 + lyr_offset},
+                #{'x':l_fab + 13.21 + lyr_offset, 'y':t_fab + 8.07 + lyr_offset}, {'x':l_fab + 13.21 + lyr_offset, 'y':t_fab + h_fab - 8.07 - lyr_offset},
+                #{'x':l_fab + 16.77 + lyr_offset, 'y':t_fab + h_fab - 7.44 - lyr_offset}, {'x':l_fab + 16.77 + lyr_offset, 'y':t_fab + h_fab - 3.47 + lyr_offset},
+                #{'x':l_fab + 7.11 + lyr_offset, 'y':t_fab + h_fab + lyr_offset}, {'x':body_offset - lyr_offset, 'y':t_fab + h_fab + lyr_offset},
+                #{'x':body_offset - lyr_offset, 'y':t_fab - lyr_offset}]
         else:
             body_polygon = [{'x':l_fab + chamfer - lyr_offset, 'y':t_fab - lyr_offset}, {'x':l_fab + w_fab + lyr_offset, 'y':t_fab - lyr_offset},
                 {'x':l_fab + w_fab + lyr_offset, 'y':t_fab + h_fab + lyr_offset}, {'x':l_fab - lyr_offset, 'y':t_fab + h_fab + lyr_offset},

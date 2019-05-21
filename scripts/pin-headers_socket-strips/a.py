@@ -75,8 +75,8 @@ if __name__ == '__main__':
     # latches are assumed to hang off the PCB so they aren't included here
     # for this footprint the body outline is hard-coded into the script
     orientation='Horizontal'
-    body_width=1.24+15.88
-    body_offset=-1.24
+    body_width=1.27+15.88 # 1.24 and 15.53 here and -1.24 below for simplified 3M 3000 outline
+    body_offset=-1.27
     latch_len=0
     mh_overlen=5.905
     mh_offset=1.8
