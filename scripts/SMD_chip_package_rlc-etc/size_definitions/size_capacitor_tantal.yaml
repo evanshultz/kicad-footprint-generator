@@ -272,7 +272,7 @@ C_6032-28:
     ipc_reference: "ipc_spec_tantalumn"
     size_info: '(Body size from: http://www.kemet.com/Lists/ProductCatalog/Attachments/253/KEM_TC101_STD.pdf)'
 
-SMD_7132-20:
+C_7132-20:
     code_metric: '7132-20'
     # size   | 7,1 x 3,2 x 2,0 mm
     code_letter: 'AVX-U'
@@ -291,7 +291,7 @@ SMD_7132-20:
     ipc_reference: "ipc_spec_tantalumn"
     size_info: '(Body size from: http://datasheets.avx.com/F72-F75.pdf)'
 
-SMD_7132-28:
+C_7132-28:
     code_metric: '7132-28'
     # size   | 7,1 x 3,2 x 2,8 mm
     code_letter: 'AVX-C'
@@ -310,7 +310,7 @@ SMD_7132-28:
     ipc_reference: "ipc_spec_tantalumn"
     size_info: '(Body size from: http://datasheets.avx.com/F72-F75.pdf)'
 
-SMD_7260-15:
+C_7260-15:
     code_metric: '7260-15'
     # size   | 7,2 x 6,0 x 1,5 mm
     code_letter: 'AVX-R'
@@ -329,7 +329,7 @@ SMD_7260-15:
     ipc_reference: "ipc_spec_tantalumn"
     size_info: '(Body size from: http://datasheets.avx.com/F72-F75.pdf)'
 
-SMD_7260-20:
+C_7260-20:
     code_metric: '7260-20'
     # size   | 7,2 x 6,0 x 2,0 mm
     code_letter: 'AVX-M'
@@ -348,7 +348,7 @@ SMD_7260-20:
     ipc_reference: "ipc_spec_tantalumn"
     size_info: '(Body size from: http://datasheets.avx.com/F72-F75.pdf)'
 
-SMD_7260-28:
+C_7260-28:
     code_metric: '7260-28'
     # size   | 7,2 x 6,0 x 2,8 mm
     code_letter: 'AVX-M'
@@ -367,7 +367,7 @@ SMD_7260-28:
     ipc_reference: "ipc_spec_tantalumn"
     size_info: '(Body size from: http://datasheets.avx.com/F72-F75.pdf)'
 
-SMD_7260-38:
+C_7260-38:
     code_metric: '7260-38'
     # size   | 7,2 x 6,0 x 3,8 mm
     code_letter: 'AVX-R'
