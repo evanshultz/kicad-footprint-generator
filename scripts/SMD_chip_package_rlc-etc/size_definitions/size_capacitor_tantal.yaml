@@ -11,7 +11,7 @@ C_1608-08:
     #terminator_spacing_max:
     terminal_length: 0.5
     terminal_length_tol: 0.1
-    ipc_reference: "ipc_spec_tantalumn"
+    ipc_reference: "ipc_spec_tantalum"
     size_info: '(Body size from: https://www.vishay.com/docs/48064/_t58_vmn_pt0471_1601.pdf)'
 
 C_1608-10:
@@ -27,7 +27,7 @@ C_1608-10:
     #terminator_spacing_max:
     terminal_length: 0.5
     terminal_length_tol: 0.1
-    ipc_reference: "ipc_spec_tantalumn"
+    ipc_reference: "ipc_spec_tantalum"
     size_info: '(Body size from: https://www.vishay.com/docs/48064/_t58_vmn_pt0471_1601.pdf)'
 
 C_2012-12:
@@ -49,7 +49,7 @@ C_2012-12:
     terminal_width:
         nominal: 0.9
         tolerance: 0.1
-    ipc_reference: "ipc_spec_tantalumn"
+    ipc_reference: "ipc_spec_tantalum"
     size_info: '(Body size from: https://www.vishay.com/docs/40182/tmch.pdf)'
 
 C_2012-15:
@@ -71,7 +71,7 @@ C_2012-15:
     terminal_width:
         nominal: 0.9
         tolerance: 0.1
-    ipc_reference: "ipc_spec_tantalumn"
+    ipc_reference: "ipc_spec_tantalum"
     size_info: '(Body size from: https://www.vishay.com/docs/40182/tmch.pdf)'
 
 C_3216-10:
@@ -93,7 +93,7 @@ C_3216-10:
     terminal_width:
         nominal: 1.2
         tolerance: 0.1
-    ipc_reference: "ipc_spec_tantalumn"
+    ipc_reference: "ipc_spec_tantalum"
     size_info: '(Body size from: http://www.kemet.com/Lists/ProductCatalog/Attachments/253/KEM_TC101_STD.pdf)'
 
 C_3216-12:
@@ -115,7 +115,7 @@ C_3216-12:
     terminal_width:
         nominal: 1.2
         tolerance: 0.1
-    ipc_reference: "ipc_spec_tantalumn"
+    ipc_reference: "ipc_spec_tantalum"
     size_info: '(Body size from: http://www.kemet.com/Lists/ProductCatalog/Attachments/253/KEM_TC101_STD.pdf)'
 
 C_3216-18:
@@ -137,7 +137,7 @@ C_3216-18:
     terminal_width:
         nominal: 1.2
         tolerance: 0.1
-    ipc_reference: "ipc_spec_tantalumn"
+    ipc_reference: "ipc_spec_tantalum"
     size_info: '(Body size from: http://www.kemet.com/Lists/ProductCatalog/Attachments/253/KEM_TC101_STD.pdf)'
 
 C_3528-12:
@@ -159,7 +159,7 @@ C_3528-12:
     terminal_width:
         nominal: 2.2
         tolerance: 0.1
-    ipc_reference: "ipc_spec_tantalumn"
+    ipc_reference: "ipc_spec_tantalum"
     size_info: '(Body size from: http://www.kemet.com/Lists/ProductCatalog/Attachments/253/KEM_TC101_STD.pdf)'
 
 C_3528-15:
@@ -181,7 +181,7 @@ C_3528-15:
     terminal_width:
         nominal: 2.2
         tolerance: 0.1
-    ipc_reference: "ipc_spec_tantalumn"
+    ipc_reference: "ipc_spec_tantalum"
     size_info: '(Body size from: http://www.kemet.com/Lists/ProductCatalog/Attachments/253/KEM_TC101_STD.pdf)'
 
 C_3528-21:
@@ -203,7 +203,7 @@ C_3528-21:
     terminal_width:
         nominal: 2.2
         tolerance: 0.1
-    ipc_reference: "ipc_spec_tantalumn"
+    ipc_reference: "ipc_spec_tantalum"
     size_info: '(Body size from: http://www.kemet.com/Lists/ProductCatalog/Attachments/253/KEM_TC101_STD.pdf)'
 
 C_6032-15:
@@ -225,7 +225,7 @@ C_6032-15:
     terminal_width:
         nominal: 2.2
         tolerance: 0.1
-    ipc_reference: "ipc_spec_tantalumn"
+    ipc_reference: "ipc_spec_tantalum"
     size_info: '(Body size from: http://www.kemet.com/Lists/ProductCatalog/Attachments/253/KEM_TC101_STD.pdf)'
 
 C_6032-20:
@@ -247,7 +247,7 @@ C_6032-20:
     terminal_width:
         nominal: 2.2
         tolerance: 0.1
-    ipc_reference: "ipc_spec_tantalumn"
+    ipc_reference: "ipc_spec_tantalum"
     size_info: '(Body size from: http://www.kemet.com/Lists/ProductCatalog/Attachments/253/KEM_TC101_STD.pdf)'
 
 C_6032-28:
@@ -269,7 +269,7 @@ C_6032-28:
     terminal_width:
         nominal: 2.2
         tolerance: 0.1
-    ipc_reference: "ipc_spec_tantalumn"
+    ipc_reference: "ipc_spec_tantalum"
     size_info: '(Body size from: http://www.kemet.com/Lists/ProductCatalog/Attachments/253/KEM_TC101_STD.pdf)'
 
 C_7132-20:
@@ -288,7 +288,7 @@ C_7132-20:
     terminator_spacing:
         nominal: 3.6
         tolerance: 0.6
-    ipc_reference: "ipc_spec_tantalumn"
+    ipc_reference: "ipc_spec_tantalum"
     size_info: '(Body size from: http://datasheets.avx.com/F72-F75.pdf)'
 
 C_7132-28:
@@ -307,7 +307,7 @@ C_7132-28:
     terminator_spacing:
         nominal: 3.6
         tolerance: 0.6
-    ipc_reference: "ipc_spec_tantalumn"
+    ipc_reference: "ipc_spec_tantalum"
     size_info: '(Body size from: http://datasheets.avx.com/F72-F75.pdf)'
 
 C_7260-15:
@@ -326,7 +326,7 @@ C_7260-15:
     terminal_length:
         nominal: 1.3
         tolerance: 0.4
-    ipc_reference: "ipc_spec_tantalumn"
+    ipc_reference: "ipc_spec_tantalum"
     size_info: '(Body size from: http://datasheets.avx.com/F72-F75.pdf)'
 
 C_7260-20:
@@ -345,7 +345,7 @@ C_7260-20:
     terminal_length:
         nominal: 1.3
         tolerance: 0.4
-    ipc_reference: "ipc_spec_tantalumn"
+    ipc_reference: "ipc_spec_tantalum"
     size_info: '(Body size from: http://datasheets.avx.com/F72-F75.pdf)'
 
 C_7260-28:
@@ -364,7 +364,7 @@ C_7260-28:
     terminal_length:
         nominal: 1.3
         tolerance: 0.4
-    ipc_reference: "ipc_spec_tantalumn"
+    ipc_reference: "ipc_spec_tantalum"
     size_info: '(Body size from: http://datasheets.avx.com/F72-F75.pdf)'
 
 C_7260-38:
@@ -383,7 +383,7 @@ C_7260-38:
     terminal_length:
         nominal: 1.3
         tolerance: 0.4
-    ipc_reference: "ipc_spec_tantalumn"
+    ipc_reference: "ipc_spec_tantalum"
     size_info: '(Body size from: http://datasheets.avx.com/F72-F75.pdf)'
 
 C_7343-15:
@@ -404,7 +404,7 @@ C_7343-15:
         tolerance: 0.3
     terminal_width_min: 2.3
     terminal_width_max: 2.5
-    ipc_reference: "ipc_spec_tantalumn"
+    ipc_reference: "ipc_spec_tantalum"
     size_info: '(Body size from: http://www.kemet.com/Lists/ProductCatalog/Attachments/253/KEM_TC101_STD.pdf)'
 
 C_7343-20:
@@ -426,7 +426,7 @@ C_7343-20:
     terminal_width:
         nominal: 2.4
         tolerance: 0.1
-    ipc_reference: "ipc_spec_tantalumn"
+    ipc_reference: "ipc_spec_tantalum"
     size_info: '(Body size from: http://www.kemet.com/Lists/ProductCatalog/Attachments/253/KEM_TC101_STD.pdf)'
 
 C_7343-30:
@@ -448,7 +448,7 @@ C_7343-30:
     terminal_width:
         nominal: 2.4
         tolerance: 0.1
-    ipc_reference: "ipc_spec_tantalumn"
+    ipc_reference: "ipc_spec_tantalum"
     size_info: '(Body size from: http://www.kemet.com/Lists/ProductCatalog/Attachments/253/KEM_TC101_STD.pdf)'
 
 C_7343-31:
@@ -470,7 +470,7 @@ C_7343-31:
     terminal_width:
         nominal: 2.4
         tolerance: 0.1
-    ipc_reference: "ipc_spec_tantalumn"
+    ipc_reference: "ipc_spec_tantalum"
     size_info: '(Body size from: http://www.kemet.com/Lists/ProductCatalog/Attachments/253/KEM_TC101_STD.pdf)'
 
 C_7343-40:
@@ -492,7 +492,7 @@ C_7343-40:
     terminal_width:
         nominal: 2.4
         tolerance: 0.1
-    ipc_reference: "ipc_spec_tantalumn"
+    ipc_reference: "ipc_spec_tantalum"
     size_info: '(Body size from: http://www.kemet.com/Lists/ProductCatalog/Attachments/253/KEM_TC101_STD.pdf)'
 
 C_7343-43:
@@ -514,7 +514,7 @@ C_7343-43:
     terminal_width:
         nominal: 2.4
         tolerance: 0.1
-    ipc_reference: "ipc_spec_tantalumn"
+    ipc_reference: "ipc_spec_tantalum"
     size_info: '(Body size from: http://www.kemet.com/Lists/ProductCatalog/Attachments/253/KEM_TC101_STD.pdf)'
 
 C_7360-38:
@@ -536,7 +536,7 @@ C_7360-38:
     terminal_width:
         nominal: 4.1
         tolerance: 0.1
-    ipc_reference: "ipc_spec_tantalumn"
+    ipc_reference: "ipc_spec_tantalum"
     size_info: '(Body size from: http://www.kemet.com/Lists/ProductCatalog/Attachments/253/KEM_TC101_STD.pdf)'
 
 C_7361-38:
@@ -558,7 +558,7 @@ C_7361-38:
     terminal_width:
         nominal: 3.1
         tolerance: 0.2
-    ipc_reference: "ipc_spec_tantalumn"
+    ipc_reference: "ipc_spec_tantalum"
     size_info: '(Body size from: http://datasheets.avx.com/NOS.pdf)'
 
 C_7361-438:
@@ -580,5 +580,5 @@ C_7361-438:
     terminal_width:
         nominal: 3.1
         tolerance: 0.2
-    ipc_reference: "ipc_spec_tantalumn"
+    ipc_reference: "ipc_spec_tantalum"
     size_info: '(Body size from: http://datasheets.avx.com/NOS.pdf)'
