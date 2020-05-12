@@ -354,7 +354,7 @@ fuse_handsolder:
 
 fuse_castellated:
     fp_lib_name: 'Fuse'
-    size_definitions: ['size_default_chip_devices.yaml', 'size_fuse.yaml']
+    size_definitions: ['size_default_chip.yaml', 'size_fuse.yaml']
     ipc_reference: "ipc_spec_castellated"
     prefix: 'Fuse'
     description: 'Fuse SMD {code_imperial:s} ({code_metric:s} Metric), castellated end terminal, IPC_7351. {size_info:s}, generated with kicad-footprint-generator'
