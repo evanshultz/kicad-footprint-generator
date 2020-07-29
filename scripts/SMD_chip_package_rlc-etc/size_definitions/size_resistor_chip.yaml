@@ -68,7 +68,7 @@ R_2010:
         maximum: 0.85
     size_info: '(Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)'
 
-SMD_1812:
+R_1812:
     code_imperial: "1812"
     code_metric: "4532"
     body_length:
