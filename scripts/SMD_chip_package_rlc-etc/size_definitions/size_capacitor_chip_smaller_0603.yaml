@@ -10,3 +10,17 @@ C_0402:
     terminator_spacing_min: 0.3
     terminator_spacing_max: 0.65
     size_info: '(Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)'
+
+C_0504:
+    code_imperial: "0504"
+    code_metric: "1310"
+    body_length:
+        minimum: 1.02
+        maximum: 1.32
+    body_width:
+        minimum: 0.77
+        maximum: 1.27
+    terminal_length:
+        minimum: 0.13
+        maximum: 0.38
+    size_info: '(Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)'
