@@ -1,6 +1,6 @@
 resistor:
     fp_lib_name: 'Resistor_SMD'
-    size_definitions: ['size_resistor_chip.yaml', 'size_resistor_chip_wide_body.yaml']
+    size_definitions: ['resistor_chip.yaml', 'resistor_chip_wide_body.yaml']
     ipc_reference: "ipc_spec_larger_or_equal_0603"
     prefix: 'R'
     description: 'Resistor SMD {code_imperial:s} ({code_metric:s} Metric), square (rectangular) end terminal, IPC_7351 nominal, {size_info:s}, generated with kicad-footprint-generator'
@@ -11,7 +11,7 @@ resistor:
 
 resistor_smaller_0603:
     fp_lib_name: 'Resistor_SMD'
-    size_definitions: ['size_resistor_chip_smaller_0603.yaml']
+    size_definitions: ['resistor_chip_smaller_0603.yaml']
     ipc_reference: "ipc_spec_smaller_0603"
     prefix: 'R'
     description: 'Resistor SMD {code_imperial:s} ({code_metric:s} Metric), square (rectangular) end terminal, IPC_7351 nominal, {size_info:s}, generated with kicad-footprint-generator'
@@ -22,7 +22,7 @@ resistor_smaller_0603:
 
 resistor_smaller_0402:
     fp_lib_name: 'Resistor_SMD'
-    size_definitions: ['size_default_chip_smaller_0402.yaml'] # IPC-SM-782 only gives chip sizes down to 0402
+    size_definitions: ['default_chip_smaller_0402.yaml'] # IPC-SM-782 only gives chip sizes down to 0402
     ipc_reference: "ipc_spec_smaller_0603"
     prefix: 'R'
     description: 'Resistor SMD {code_imperial:s} ({code_metric:s} Metric), square (rectangular) end terminal, IPC_7351 nominal, {size_info:s}, generated with kicad-footprint-generator'
@@ -36,7 +36,7 @@ resistor_smaller_0402:
 
 resistor_handsolder:
     fp_lib_name: 'Resistor_SMD'
-    size_definitions: ['size_resistor_chip.yaml', 'size_resistor_chip_wide_body.yaml']
+    size_definitions: ['resistor_chip.yaml', 'resistor_chip_wide_body.yaml']
     ipc_reference: "ipc_spec_larger_or_equal_0603"
     prefix: 'R'
     description: 'Resistor SMD {code_imperial:s} ({code_metric:s} Metric), square (rectangular) end terminal, IPC_7351 nominal with elongated pad for handsoldering. {size_info:s}, generated with kicad-footprint-generator'
@@ -49,7 +49,7 @@ resistor_handsolder:
 
 capacitor:
     fp_lib_name: 'Capacitor_SMD'
-    size_definitions: ['size_capacitor_chip.yaml']
+    size_definitions: ['capacitor_chip.yaml']
     ipc_reference: "ipc_spec_larger_or_equal_0603"
     prefix: 'C'
     description: 'Capacitor SMD {code_imperial:s} ({code_metric:s} Metric), square (rectangular) end terminal, IPC_7351 nominal, {size_info:s}, generated with kicad-footprint-generator'
@@ -60,7 +60,7 @@ capacitor:
 
 capacitor_smaller_0603:
     fp_lib_name: 'Capacitor_SMD'
-    size_definitions: ['size_capacitor_chip_smaller_0603.yaml']
+    size_definitions: ['capacitor_chip_smaller_0603.yaml']
     ipc_reference: "ipc_spec_smaller_0603"
     prefix: 'C'
     description: 'Capacitor SMD {code_imperial:s} ({code_metric:s} Metric), square (rectangular) end terminal, IPC_7351 nominal, {size_info:s}, generated with kicad-footprint-generator'
@@ -71,7 +71,7 @@ capacitor_smaller_0603:
 
 capacitor_smaller_0402:
     fp_lib_name: 'Capacitor_SMD'
-    size_definitions: ['size_default_chip_smaller_0402.yaml'] # IPC-SM-782 only gives chip sizes down to 0402
+    size_definitions: ['default_chip_smaller_0402.yaml'] # IPC-SM-782 only gives chip sizes down to 0402
     ipc_reference: "ipc_spec_smaller_0603"
     prefix: 'C'
     description: 'Capacitor SMD {code_imperial:s} ({code_metric:s} Metric), square (rectangular) end terminal, IPC_7351 nominal, {size_info:s}, generated with kicad-footprint-generator'
@@ -85,7 +85,7 @@ capacitor_smaller_0402:
 
 capacitor_handsolder:
     fp_lib_name: 'Capacitor_SMD'
-    size_definitions: ['size_capacitor_chip.yaml']
+    size_definitions: ['capacitor_chip.yaml']
     ipc_reference: "ipc_spec_larger_or_equal_0603"
     prefix: 'C'
     description: 'Capacitor SMD {code_imperial:s} ({code_metric:s} Metric), square (rectangular) end terminal, IPC_7351 nominal with elongated pad for handsoldering. {size_info:s}, generated with kicad-footprint-generator'
@@ -97,7 +97,7 @@ capacitor_handsolder:
 
 capacitor_tantal:
     fp_lib_name: 'Capacitor_Tantalum_SMD'
-    size_definitions: ['size_capacitor_tantal.yaml']
+    size_definitions: ['capacitor_tantal.yaml']
     ipc_reference: "ipc_spec_larger_or_equal_0603"
     prefix: 'CP'
     description: 'Tantalum Capacitor SMD {code_letter:s} ({code_metric:s} Metric), IPC_7351 nominal, {size_info:s}, generated with kicad-footprint-generator'
@@ -109,7 +109,7 @@ capacitor_tantal:
 
 capacitor_tantal_handsolder:
     fp_lib_name: 'Capacitor_Tantalum_SMD'
-    size_definitions: ['size_capacitor_tantal.yaml']
+    size_definitions: ['capacitor_tantal.yaml']
     ipc_reference: "ipc_spec_larger_or_equal_0603"
     prefix: 'CP'
     description: 'Tantalum Capacitor SMD {code_letter:s} ({code_metric:s} Metric), IPC_7351 nominal, {size_info:s}, generated with kicad-footprint-generator'
@@ -123,7 +123,7 @@ capacitor_tantal_handsolder:
 
 inductor:
     fp_lib_name: 'Inductor_SMD'
-    size_definitions: ['size_default_chip.yaml', 'size_inductor.yaml'] # specific inductor size definitions overwrite generic ones, and IPC doesn't give 0402 or 0603 inductor chip dimensions
+    size_definitions: ['default_chip.yaml', 'inductor.yaml'] # specific inductor size definitions overwrite generic ones, and IPC doesn't give 0402 or 0603 inductor chip dimensions
     ipc_reference: "ipc_spec_larger_or_equal_0603"
     prefix: 'L'
     description: 'Inductor SMD {code_imperial:s} ({code_metric:s} Metric), square (rectangular) end terminal, IPC_7351 nominal, {size_info:s}, generated with kicad-footprint-generator'
@@ -134,7 +134,7 @@ inductor:
 
 inductor_smaller_0603:
     fp_lib_name: 'Inductor_SMD'
-    size_definitions: ['size_default_chip_smaller_0603.yaml']
+    size_definitions: ['default_chip_smaller_0603.yaml']
     ipc_reference: "ipc_spec_smaller_0603"
     prefix: 'L'
     description: 'Inductor SMD {code_imperial:s} ({code_metric:s} Metric), square (rectangular) end terminal, IPC_7351 nominal, {size_info:s}, generated with kicad-footprint-generator'
@@ -145,7 +145,7 @@ inductor_smaller_0603:
 
 inductor_smaller_0402:
     fp_lib_name: 'Inductor_SMD'
-    size_definitions: ['size_default_chip_smaller_0402.yaml'] # IPC-SM-782 only gives chip sizes down to 0402
+    size_definitions: ['default_chip_smaller_0402.yaml'] # IPC-SM-782 only gives chip sizes down to 0402
     ipc_reference: "ipc_spec_smaller_0603"
     prefix: 'L'
     description: 'Inductor SMD {code_imperial:s} ({code_metric:s} Metric), square (rectangular) end terminal, IPC_7351 nominal, {size_info:s}, generated with kicad-footprint-generator'
@@ -159,7 +159,7 @@ inductor_smaller_0402:
 
 inductor_handsolder:
     fp_lib_name: 'Inductor_SMD'
-    size_definitions: ['size_default_chip.yaml', 'size_inductor.yaml'] # inductor size definitions overwrite generic ones
+    size_definitions: ['default_chip.yaml', 'inductor.yaml'] # inductor size definitions overwrite generic ones
     ipc_reference: "ipc_spec_larger_or_equal_0603"
     prefix: 'L'
     description: 'Inductor SMD {code_imperial:s} ({code_metric:s} Metric), square (rectangular) end terminal, IPC_7351 nominal with elongated pad for handsoldering. {size_info:s}, generated with kicad-footprint-generator'
@@ -172,7 +172,7 @@ inductor_handsolder:
 
 diode:
     fp_lib_name: 'Diode_SMD'
-    size_definitions: ['size_default_chip.yaml', 'size_diode.yaml']
+    size_definitions: ['default_chip.yaml', 'diode.yaml']
     ipc_reference: "ipc_spec_larger_or_equal_0603"
     prefix: 'D'
     description: 'Diode SMD {code_imperial:s} ({code_metric:s} Metric), square (rectangular) end terminal, IPC_7351 nominal, {size_info:s}, generated with kicad-footprint-generator'
@@ -184,7 +184,7 @@ diode:
 
 diode_smaller_0603:
     fp_lib_name: 'Diode_SMD'
-    size_definitions: ['size_default_chip_smaller_0603.yaml']
+    size_definitions: ['default_chip_smaller_0603.yaml']
     ipc_reference: "ipc_spec_smaller_0603"
     prefix: 'D'
     description: 'Diode SMD {code_imperial:s} ({code_metric:s} Metric), square (rectangular) end terminal, IPC_7351 nominal, {size_info:s}, generated with kicad-footprint-generator'
@@ -196,7 +196,7 @@ diode_smaller_0603:
 
 diode_smaller_0402:
     fp_lib_name: 'Diode_SMD'
-    size_definitions: ['size_default_chip_smaller_0402.yaml'] # IPC-SM-782 only gives chip sizes down to 0402
+    size_definitions: ['default_chip_smaller_0402.yaml'] # IPC-SM-782 only gives chip sizes down to 0402
     ipc_reference: "ipc_spec_smaller_0603"
     prefix: 'D'
     description: 'Diode SMD {code_imperial:s} ({code_metric:s} Metric), square (rectangular) end terminal, IPC_7351 nominal, {size_info:s}, generated with kicad-footprint-generator'
@@ -211,7 +211,7 @@ diode_smaller_0402:
 
 diode_handsolder:
     fp_lib_name: 'Diode_SMD'
-    size_definitions: ['size_default_chip.yaml', 'size_diode.yaml']
+    size_definitions: ['default_chip.yaml', 'diode.yaml']
     ipc_reference: "ipc_spec_larger_or_equal_0603"
     prefix: 'D'
     description: 'Diode SMD {code_imperial:s} ({code_metric:s} Metric), square (rectangular) end terminal, IPC_7351 nominal, {size_info:s}, generated with kicad-footprint-generator'
@@ -224,7 +224,7 @@ diode_handsolder:
 
 diode_castellated:
     fp_lib_name: 'Diode_SMD'
-    size_definitions: ['size_default_chip.yaml', 'size_diode.yaml']
+    size_definitions: ['default_chip.yaml', 'diode.yaml']
     ipc_reference: "ipc_spec_castellated"
     prefix: 'D'
     description: 'Diode SMD {code_imperial:s} ({code_metric:s} Metric), castellated end terminal, IPC_7351 nominal, {size_info:s}, generated with kicad-footprint-generator'
@@ -237,7 +237,7 @@ diode_castellated:
 
 led:
     fp_lib_name: 'LED_SMD'
-    size_definitions: ['size_default_chip.yaml']
+    size_definitions: ['default_chip.yaml']
     ipc_reference: "ipc_spec_larger_or_equal_0603"
     prefix: 'LED'
     description: 'LED SMD {code_imperial:s} ({code_metric:s} Metric), square (rectangular) end terminal, IPC_7351 nominal, {size_info:s}, generated with kicad-footprint-generator'
@@ -249,7 +249,7 @@ led:
 
 led_smaller_0603:
     fp_lib_name: 'LED_SMD'
-    size_definitions: ['size_default_chip_smaller_0603.yaml']
+    size_definitions: ['default_chip_smaller_0603.yaml']
     ipc_reference: "ipc_spec_smaller_0603"
     prefix: 'LED'
     description: 'LED SMD {code_imperial:s} ({code_metric:s} Metric), square (rectangular) end terminal, IPC_7351 nominal, {size_info:s}, generated with kicad-footprint-generator'
@@ -261,7 +261,7 @@ led_smaller_0603:
 
 led_smaller_0402:
     fp_lib_name: 'LED_SMD'
-    size_definitions: ['size_default_chip_smaller_0402.yaml'] # IPC-SM-782 only gives chip sizes down to 0402
+    size_definitions: ['default_chip_smaller_0402.yaml'] # IPC-SM-782 only gives chip sizes down to 0402
     ipc_reference: "ipc_spec_smaller_0603"
     prefix: 'LED'
     description: 'LED SMD {code_imperial:s} ({code_metric:s} Metric), square (rectangular) end terminal, IPC_7351 nominal, {size_info:s}, generated with kicad-footprint-generator'
@@ -276,7 +276,7 @@ led_smaller_0402:
 
 led_handsolder:
     fp_lib_name: 'LED_SMD'
-    size_definitions: ['size_default_chip.yaml']
+    size_definitions: ['default_chip.yaml']
     ipc_reference: "ipc_spec_larger_or_equal_0603"
     prefix: 'LED'
     description: 'LED SMD {code_imperial:s} ({code_metric:s} Metric), square (rectangular) end terminal, IPC_7351 nominal, {size_info:s}, generated with kicad-footprint-generator'
@@ -289,7 +289,7 @@ led_handsolder:
 
 led_castellated:
     fp_lib_name: 'LED_SMD'
-    size_definitions: ['size_default_chip.yaml']
+    size_definitions: ['default_chip.yaml']
     ipc_reference: "ipc_spec_castellated"
     prefix: 'LED'
     description: 'LED SMD {code_imperial:s} ({code_metric:s} Metric), castellated end terminal, IPC_7351 nominal, {size_info:s}, generated with kicad-footprint-generator'
@@ -302,7 +302,7 @@ led_castellated:
 ###############################################################################
 fuse:
     fp_lib_name: 'Fuse'
-    size_definitions: ['size_default_chip.yaml', 'size_fuse.yaml']
+    size_definitions: ['default_chip.yaml', 'fuse.yaml']
     ipc_reference: "ipc_spec_larger_or_equal_0603"
     prefix: 'Fuse'
     description: 'Fuse SMD {code_imperial:s} ({code_metric:s} Metric), square (rectangular) end terminal, IPC_7351 nominal, {size_info:s}, generated with kicad-footprint-generator'
@@ -313,7 +313,7 @@ fuse:
 
 fuse_smaller_0603:
     fp_lib_name: 'Fuse'
-    size_definitions: ['size_default_chip_smaller_0603.yaml']
+    size_definitions: ['default_chip_smaller_0603.yaml']
     ipc_reference: "ipc_spec_smaller_0603"
     prefix: 'Fuse'
     description: 'Fuse SMD {code_imperial:s} ({code_metric:s} Metric), square (rectangular) end terminal, IPC_7351 nominal, {size_info:s}, generated with kicad-footprint-generator'
@@ -324,7 +324,7 @@ fuse_smaller_0603:
 
 fuse_smaller_0402:
     fp_lib_name: 'Fuse'
-    size_definitions: ['size_default_chip_smaller_0402.yaml'] # IPC-SM-782 only gives chip sizes down to 0402
+    size_definitions: ['default_chip_smaller_0402.yaml'] # IPC-SM-782 only gives chip sizes down to 0402
     ipc_reference: "ipc_spec_smaller_0603"
     prefix: 'Fuse'
     description: 'Fuse SMD {code_imperial:s} ({code_metric:s} Metric), square (rectangular) end terminal, IPC_7351 nominal, {size_info:s}, generated with kicad-footprint-generator'
@@ -338,7 +338,7 @@ fuse_smaller_0402:
 
 fuse_handsolder:
     fp_lib_name: 'Fuse'
-    size_definitions: ['size_default_chip.yaml', 'size_fuse.yaml']
+    size_definitions: ['default_chip.yaml', 'fuse.yaml']
     ipc_reference: "ipc_spec_larger_or_equal_0603"
     prefix: 'Fuse'
     description: 'Fuse SMD {code_imperial:s} ({code_metric:s} Metric), square (rectangular) end terminal, IPC_7351 nominal with elongated pad for handsoldering. {size_info:s}, generated with kicad-footprint-generator'
@@ -350,7 +350,7 @@ fuse_handsolder:
 
 fuse_castellated:
     fp_lib_name: 'Fuse'
-    size_definitions: ['size_default_chip.yaml', 'size_fuse.yaml']
+    size_definitions: ['default_chip.yaml', 'fuse.yaml']
     ipc_reference: "ipc_spec_castellated"
     prefix: 'Fuse'
     description: 'Fuse SMD {code_imperial:s} ({code_metric:s} Metric), castellated end terminal, IPC_7351. {size_info:s}, generated with kicad-footprint-generator'

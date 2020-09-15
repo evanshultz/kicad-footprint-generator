@@ -23,7 +23,10 @@ C_0805:
         maximum: 1.45
     terminal_length:
         minimum: 0.25
-        maximum: 0.55 # only deviation from IPC is reducing this from 0.75mm
+        maximum: 0.75 # only deviation from IPC is reducing this from 0.75mm
+#    terminator_spacing:
+#      minimum: 0.3
+#      maximum: 1.11
     size_info: '(Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf, https://docs.google.com/spreadsheets/d/1BsfQQcO9C6DZCsRaXUlFlo91Tg2WpOkGARC1WS5S8t0/edit?usp=sharing)'
 
 C_1206:
