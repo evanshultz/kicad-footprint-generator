@@ -140,7 +140,6 @@ class TwoTerminalSMDchip():
 
         pad_details, paste_details = self.calcPadDetails(device_dimensions, ipc_data_set, ipc_round_base, footprint_group_data)
         #print(calc_pad_details())
-        #print("generate {name}.kicad_mod".format(name=footprint))
 
         suffix = footprint_group_data.get('suffix', '').format(pad_x=pad_details['size'][0],
             pad_y=pad_details['size'][1])
@@ -357,5 +356,5 @@ if __name__ == "__main__":
         configuration['round_rect_radius_ratio'] = 0
 
     for filepath in args.files:
-        two_terminal_smd =TwoTerminalSMDchip(filepath, configuration)
+        two_terminal_smd = TwoTerminalSMDchip(filepath, configuration)
         two_terminal_smd.generateFootprints()

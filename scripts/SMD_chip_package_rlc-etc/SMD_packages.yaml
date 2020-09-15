@@ -237,7 +237,7 @@ diode_castellated:
 
 led:
     fp_lib_name: 'LED_SMD'
-    size_definitions: ['size_default_chip.yaml', 'size_led.yaml']
+    size_definitions: ['size_default_chip.yaml']
     ipc_reference: "ipc_spec_larger_or_equal_0603"
     prefix: 'LED'
     description: 'LED SMD {code_imperial:s} ({code_metric:s} Metric), square (rectangular) end terminal, IPC_7351 nominal, {size_info:s}, generated with kicad-footprint-generator'
@@ -276,7 +276,7 @@ led_smaller_0402:
 
 led_handsolder:
     fp_lib_name: 'LED_SMD'
-    size_definitions: ['size_default_chip.yaml', 'size_led.yaml']
+    size_definitions: ['size_default_chip.yaml']
     ipc_reference: "ipc_spec_larger_or_equal_0603"
     prefix: 'LED'
     description: 'LED SMD {code_imperial:s} ({code_metric:s} Metric), square (rectangular) end terminal, IPC_7351 nominal, {size_info:s}, generated with kicad-footprint-generator'
@@ -289,7 +289,7 @@ led_handsolder:
 
 led_castellated:
     fp_lib_name: 'LED_SMD'
-    size_definitions: ['size_default_chip.yaml', 'size_led.yaml']
+    size_definitions: ['size_default_chip.yaml']
     ipc_reference: "ipc_spec_castellated"
     prefix: 'LED'
     description: 'LED SMD {code_imperial:s} ({code_metric:s} Metric), castellated end terminal, IPC_7351 nominal, {size_info:s}, generated with kicad-footprint-generator'
