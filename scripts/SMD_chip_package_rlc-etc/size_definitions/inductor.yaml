@@ -24,7 +24,6 @@ L_1008:
   terminal_length:
     nominal: 0.6
     tolerance: 0.25
-  ipc_reference: "ipc_spec_larger_or_equal_0603"
   size_info: '(Body size source: https://ecsxtal.com/store/pdf/ECS-MPI2520-SMD-POWER-INDUCTOR.pdf)'
 
 L_1206:
