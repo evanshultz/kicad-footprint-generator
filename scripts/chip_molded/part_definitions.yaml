@@ -95,9 +95,9 @@ capacitor_handsolder:
     suffix: "_Pad{pad_x:.2f}x{pad_y:.2f}mm_HandSolder"
     include_suffix_in_3dpath: 'False'
 
-capacitor_tantal:
+capacitor_tantalum:
     fp_lib_name: 'Capacitor_Tantalum_SMD'
-    size_definitions: ['capacitor_tantal.yaml']
+    size_definitions: ['capacitor_tantalum.yaml']
     ipc_reference: "ipc_spec_larger_or_equal_0603"
     prefix: 'CP'
     description: 'Tantalum Capacitor SMD {code_letter:s} ({code_metric:s} Metric), IPC_7351 nominal, {size_info:s}, generated with kicad-footprint-generator'
@@ -107,9 +107,9 @@ capacitor_tantal:
     suffix: ""
     polarization_mark: 'True'
 
-capacitor_tantal_handsolder:
+capacitor_tantalum_handsolder:
     fp_lib_name: 'Capacitor_Tantalum_SMD'
-    size_definitions: ['capacitor_tantal.yaml']
+    size_definitions: ['capacitor_tantalum.yaml']
     ipc_reference: "ipc_spec_larger_or_equal_0603"
     prefix: 'CP'
     description: 'Tantalum Capacitor SMD {code_letter:s} ({code_metric:s} Metric), IPC_7351 nominal, {size_info:s}, generated with kicad-footprint-generator'
