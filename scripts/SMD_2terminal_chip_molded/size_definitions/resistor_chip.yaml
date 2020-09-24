@@ -122,5 +122,4 @@ R_4020:
     terminal_length:
       nominal: 0.9
       tolerance: 0.2
-    ipc_reference: "ipc_spec_larger_or_equal_0603"
     size_info: '(Body size source: http://datasheet.octopart.com/HVC0603T5004FET-Ohmite-datasheet-26699797.pdf)'

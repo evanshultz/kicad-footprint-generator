@@ -133,7 +133,10 @@ class TwoTerminalSMDchip():
 
         device_dimensions = TwoTerminalSMDchip.deviceDimensions(device_size_data)
 
-        ipc_reference = footprint_group_data['ipc_reference']
+        if 'ipc_reference' in device_size_data:
+            ipc_reference = device_size_data['ipc_reference']
+        else:
+            ipc_reference = footprint_group_data['ipc_reference']
         ipc_density = footprint_group_data['ipc_density']
         ipc_data_set = self.ipc_defintions[ipc_reference][ipc_density]
         ipc_round_base = self.ipc_defintions[ipc_reference]['round_base']

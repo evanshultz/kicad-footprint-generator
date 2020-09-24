@@ -1,18 +1,7 @@
 resistor:
     fp_lib_name: 'Resistor_SMD'
-    size_definitions: ['resistor_chip.yaml', 'resistor_chip_wide_body.yaml']
+    size_definitions: ['resistor_chip.yaml', 'resistor_chip_smaller_0603.yaml', 'resistor_chip_wide_body.yaml']
     ipc_reference: "ipc_spec_larger_or_equal_0603"
-    prefix: 'R'
-    description: 'Resistor SMD {code_imperial:s} ({code_metric:s} Metric), square (rectangular) end terminal, IPC_7351 nominal, {size_info:s}, generated with kicad-footprint-generator'
-    keywords: 'resistor'
-    ipc_density: 'nominal'
-    pad_length_addition: 0
-    suffix: ""
-
-resistor_smaller_0603:
-    fp_lib_name: 'Resistor_SMD'
-    size_definitions: ['resistor_chip_smaller_0603.yaml']
-    ipc_reference: "ipc_spec_smaller_0603"
     prefix: 'R'
     description: 'Resistor SMD {code_imperial:s} ({code_metric:s} Metric), square (rectangular) end terminal, IPC_7351 nominal, {size_info:s}, generated with kicad-footprint-generator'
     keywords: 'resistor'
@@ -36,20 +25,8 @@ resistor_smaller_0402:
 
 resistor_handsolder:
     fp_lib_name: 'Resistor_SMD'
-    size_definitions: ['resistor_chip.yaml', 'resistor_chip_wide_body.yaml']
+    size_definitions: ['resistor_chip.yaml', 'resistor_chip_smaller_0603.yaml', 'resistor_chip_wide_body.yaml']
     ipc_reference: "ipc_spec_larger_or_equal_0603"
-    prefix: 'R'
-    description: 'Resistor SMD {code_imperial:s} ({code_metric:s} Metric), square (rectangular) end terminal, IPC_7351 nominal with elongated pad for handsoldering. {size_info:s}, generated with kicad-footprint-generator'
-    keywords: 'resistor handsolder'
-    ipc_density: 'nominal'
-    pad_length_addition: 0.35
-    suffix: "_Pad{pad_x:.2f}x{pad_y:.2f}mm_HandSolder"
-    include_suffix_in_3dpath: 'False'
-
-resistor_handsolder_smaller_0603:
-    fp_lib_name: 'Resistor_SMD'
-    size_definitions: ['resistor_chip_smaller_0603.yaml']
-    ipc_reference: "ipc_spec_smaller_0603"
     prefix: 'R'
     description: 'Resistor SMD {code_imperial:s} ({code_metric:s} Metric), square (rectangular) end terminal, IPC_7351 nominal with elongated pad for handsoldering. {size_info:s}, generated with kicad-footprint-generator'
     keywords: 'resistor handsolder'
@@ -77,19 +54,8 @@ resistor_handsolder_smaller_0402:
 
 capacitor:
     fp_lib_name: 'Capacitor_SMD'
-    size_definitions: ['capacitor_chip.yaml']
+    size_definitions: ['capacitor_chip.yaml', 'capacitor_chip_smaller_0603.yaml']
     ipc_reference: "ipc_spec_larger_or_equal_0603"
-    prefix: 'C'
-    description: 'Capacitor SMD {code_imperial:s} ({code_metric:s} Metric), square (rectangular) end terminal, IPC_7351 nominal, {size_info:s}, generated with kicad-footprint-generator'
-    keywords: 'capacitor'
-    ipc_density: 'nominal'
-    pad_length_addition: 0
-    suffix: ""
-
-capacitor_smaller_0603:
-    fp_lib_name: 'Capacitor_SMD'
-    size_definitions: ['capacitor_chip_smaller_0603.yaml']
-    ipc_reference: "ipc_spec_smaller_0603"
     prefix: 'C'
     description: 'Capacitor SMD {code_imperial:s} ({code_metric:s} Metric), square (rectangular) end terminal, IPC_7351 nominal, {size_info:s}, generated with kicad-footprint-generator'
     keywords: 'capacitor'
@@ -113,20 +79,8 @@ capacitor_smaller_0402:
 
 capacitor_handsolder:
     fp_lib_name: 'Capacitor_SMD'
-    size_definitions: ['capacitor_chip.yaml']
+    size_definitions: ['capacitor_chip.yaml', 'capacitor_chip_smaller_0603.yaml']
     ipc_reference: "ipc_spec_larger_or_equal_0603"
-    prefix: 'C'
-    description: 'Capacitor SMD {code_imperial:s} ({code_metric:s} Metric), square (rectangular) end terminal, IPC_7351 nominal with elongated pad for handsoldering. {size_info:s}, generated with kicad-footprint-generator'
-    keywords: 'capacitor handsolder'
-    ipc_density: 'nominal'
-    pad_length_addition: 0.35
-    suffix: "_Pad{pad_x:.2f}x{pad_y:.2f}mm_HandSolder"
-    include_suffix_in_3dpath: 'False'
-
-capacitor_handsolder_smaller_0603:
-    fp_lib_name: 'Capacitor_SMD'
-    size_definitions: ['capacitor_chip_smaller_0603.yaml']
-    ipc_reference: "ipc_spec_smaller_0603"
     prefix: 'C'
     description: 'Capacitor SMD {code_imperial:s} ({code_metric:s} Metric), square (rectangular) end terminal, IPC_7351 nominal with elongated pad for handsoldering. {size_info:s}, generated with kicad-footprint-generator'
     keywords: 'capacitor handsolder'
@@ -179,19 +133,8 @@ capacitor_tantalum_handsolder:
 
 inductor:
     fp_lib_name: 'Inductor_SMD'
-    size_definitions: ['default_chip.yaml', 'inductor.yaml'] # specific inductor size definitions overwrite generic ones, and IPC doesn't give smaller than 0805 chip dimensions
+    size_definitions: ['default_chip.yaml', 'default_chip_smaller_0603.yaml', 'inductor.yaml'] # specific size definitions overwrite generic ones, and IPC-SM-782 doesn't give smaller than 0805 chip dimensions
     ipc_reference: "ipc_spec_larger_or_equal_0603"
-    prefix: 'L'
-    description: 'Inductor SMD {code_imperial:s} ({code_metric:s} Metric), square (rectangular) end terminal, IPC_7351 nominal, {size_info:s}, generated with kicad-footprint-generator'
-    keywords: 'inductor'
-    ipc_density: 'nominal'
-    pad_length_addition: 0
-    suffix: ""
-
-inductor_smaller_0603:
-    fp_lib_name: 'Inductor_SMD'
-    size_definitions: ['default_chip_smaller_0603.yaml']
-    ipc_reference: "ipc_spec_smaller_0603"
     prefix: 'L'
     description: 'Inductor SMD {code_imperial:s} ({code_metric:s} Metric), square (rectangular) end terminal, IPC_7351 nominal, {size_info:s}, generated with kicad-footprint-generator'
     keywords: 'inductor'
@@ -215,20 +158,8 @@ inductor_smaller_0402:
 
 inductor_handsolder:
     fp_lib_name: 'Inductor_SMD'
-    size_definitions: ['default_chip.yaml', 'inductor.yaml'] # specific inductor size definitions overwrite generic ones, and IPC doesn't give smaller than 0805 chip dimensions
+    size_definitions: ['default_chip.yaml', 'default_chip_smaller_0603.yaml', 'inductor.yaml'] # specific size definitions overwrite generic ones, and IPC-SM-782 doesn't give smaller than 0805 chip dimensions
     ipc_reference: "ipc_spec_larger_or_equal_0603"
-    prefix: 'L'
-    description: 'Inductor SMD {code_imperial:s} ({code_metric:s} Metric), square (rectangular) end terminal, IPC_7351 nominal with elongated pad for handsoldering. {size_info:s}, generated with kicad-footprint-generator'
-    keywords: 'inductor handsolder'
-    ipc_density: 'nominal'
-    pad_length_addition: 0.35
-    suffix: "_Pad{pad_x:.2f}x{pad_y:.2f}mm_HandSolder"
-    include_suffix_in_3dpath: 'False'
-
-inductor_handsolder_smaller_0603:
-    fp_lib_name: 'Inductor_SMD'
-    size_definitions: ['default_chip_smaller_0603.yaml']
-    ipc_reference: "ipc_spec_smaller_0603"
     prefix: 'L'
     description: 'Inductor SMD {code_imperial:s} ({code_metric:s} Metric), square (rectangular) end terminal, IPC_7351 nominal with elongated pad for handsoldering. {size_info:s}, generated with kicad-footprint-generator'
     keywords: 'inductor handsolder'
@@ -256,20 +187,8 @@ inductor_handsolder_smaller_0402:
 
 diode:
     fp_lib_name: 'Diode_SMD'
-    size_definitions: ['default_chip.yaml', 'diode.yaml']
+    size_definitions: ['default_chip.yaml', 'default_chip_smaller_0603.yaml', 'diode.yaml']
     ipc_reference: "ipc_spec_larger_or_equal_0603"
-    prefix: 'D'
-    description: 'Diode SMD {code_imperial:s} ({code_metric:s} Metric), square (rectangular) end terminal, IPC_7351 nominal, {size_info:s}, generated with kicad-footprint-generator'
-    keywords: 'diode'
-    ipc_density: 'nominal'
-    pad_length_addition: 0
-    polarization_mark: 'True'
-    suffix: ""
-
-diode_smaller_0603:
-    fp_lib_name: 'Diode_SMD'
-    size_definitions: ['default_chip_smaller_0603.yaml']
-    ipc_reference: "ipc_spec_smaller_0603"
     prefix: 'D'
     description: 'Diode SMD {code_imperial:s} ({code_metric:s} Metric), square (rectangular) end terminal, IPC_7351 nominal, {size_info:s}, generated with kicad-footprint-generator'
     keywords: 'diode'
@@ -295,21 +214,8 @@ diode_smaller_0402:
 
 diode_handsolder:
     fp_lib_name: 'Diode_SMD'
-    size_definitions: ['default_chip.yaml', 'diode.yaml']
+    size_definitions: ['default_chip.yaml', 'default_chip_smaller_0603.yaml', 'diode.yaml']
     ipc_reference: "ipc_spec_larger_or_equal_0603"
-    prefix: 'D'
-    description: 'Diode SMD {code_imperial:s} ({code_metric:s} Metric), square (rectangular) end terminal, IPC_7351 nominal, {size_info:s}, generated with kicad-footprint-generator'
-    keywords: 'diode handsolder'
-    ipc_density: 'nominal'
-    pad_length_addition: 0.35
-    polarization_mark: 'True'
-    suffix: "_Pad{pad_x:.2f}x{pad_y:.2f}mm_HandSolder"
-    include_suffix_in_3dpath: 'False'
-
-diode_handsolder_smaller_0603:
-    fp_lib_name: 'Diode_SMD'
-    size_definitions: ['default_chip_smaller_0603.yaml']
-    ipc_reference: "ipc_spec_smaller_0603"
     prefix: 'D'
     description: 'Diode SMD {code_imperial:s} ({code_metric:s} Metric), square (rectangular) end terminal, IPC_7351 nominal, {size_info:s}, generated with kicad-footprint-generator'
     keywords: 'diode handsolder'
@@ -337,19 +243,7 @@ diode_handsolder_smaller_0402:
 
 diode_castellated:
     fp_lib_name: 'Diode_SMD'
-    size_definitions: ['default_chip.yaml', 'diode.yaml']
-    ipc_reference: "ipc_spec_castellated"
-    prefix: 'D'
-    description: 'Diode SMD {code_imperial:s} ({code_metric:s} Metric), castellated end terminal, IPC_7351 nominal, {size_info:s}, generated with kicad-footprint-generator'
-    keywords: 'diode castellated'
-    ipc_density: 'nominal'
-    pad_length_addition: 0
-    polarization_mark: 'True'
-    suffix: "_Castellated"
-
-diode_castellated_smaller_0603:
-    fp_lib_name: 'Diode_SMD'
-    size_definitions: ['default_chip_smaller_0603.yaml']
+    size_definitions: ['default_chip.yaml', 'default_chip_smaller_0603.yaml', 'diode.yaml']
     ipc_reference: "ipc_spec_castellated"
     prefix: 'D'
     description: 'Diode SMD {code_imperial:s} ({code_metric:s} Metric), castellated end terminal, IPC_7351 nominal, {size_info:s}, generated with kicad-footprint-generator'
@@ -378,20 +272,8 @@ diode_castellated_smaller_0402:
 
 led:
     fp_lib_name: 'LED_SMD'
-    size_definitions: ['default_chip.yaml']
+    size_definitions: ['default_chip.yaml', 'default_chip_smaller_0603.yaml']
     ipc_reference: "ipc_spec_larger_or_equal_0603"
-    prefix: 'LED'
-    description: 'LED SMD {code_imperial:s} ({code_metric:s} Metric), square (rectangular) end terminal, IPC_7351 nominal, {size_info:s}, generated with kicad-footprint-generator'
-    keywords: 'LED'
-    ipc_density: 'nominal'
-    pad_length_addition: 0
-    polarization_mark: 'True'
-    suffix: ""
-
-led_smaller_0603:
-    fp_lib_name: 'LED_SMD'
-    size_definitions: ['default_chip_smaller_0603.yaml']
-    ipc_reference: "ipc_spec_smaller_0603"
     prefix: 'LED'
     description: 'LED SMD {code_imperial:s} ({code_metric:s} Metric), square (rectangular) end terminal, IPC_7351 nominal, {size_info:s}, generated with kicad-footprint-generator'
     keywords: 'LED'
@@ -417,21 +299,8 @@ led_smaller_0402:
 
 led_handsolder:
     fp_lib_name: 'LED_SMD'
-    size_definitions: ['default_chip.yaml']
+    size_definitions: ['default_chip.yaml', 'default_chip_smaller_0603.yaml']
     ipc_reference: "ipc_spec_larger_or_equal_0603"
-    prefix: 'LED'
-    description: 'LED SMD {code_imperial:s} ({code_metric:s} Metric), square (rectangular) end terminal, IPC_7351 nominal, {size_info:s}, generated with kicad-footprint-generator'
-    keywords: 'LED handsolder'
-    ipc_density: 'nominal'
-    pad_length_addition: 0.35
-    polarization_mark: 'True'
-    suffix: "_Pad{pad_x:.2f}x{pad_y:.2f}mm_HandSolder"
-    include_suffix_in_3dpath: 'False'
-
-led_handsolder_smaller_0603:
-    fp_lib_name: 'LED_SMD'
-    size_definitions: ['default_chip_smaller_0603.yaml']
-    ipc_reference: "ipc_spec_smaller_0603"
     prefix: 'LED'
     description: 'LED SMD {code_imperial:s} ({code_metric:s} Metric), square (rectangular) end terminal, IPC_7351 nominal, {size_info:s}, generated with kicad-footprint-generator'
     keywords: 'LED handsolder'
@@ -459,19 +328,7 @@ led_handsolder_smaller_0402:
 
 led_castellated:
     fp_lib_name: 'LED_SMD'
-    size_definitions: ['default_chip.yaml']
-    ipc_reference: "ipc_spec_castellated"
-    prefix: 'LED'
-    description: 'LED SMD {code_imperial:s} ({code_metric:s} Metric), castellated end terminal, IPC_7351 nominal, {size_info:s}, generated with kicad-footprint-generator'
-    keywords: 'LED castellated'
-    ipc_density: 'nominal'
-    pad_length_addition: 0
-    polarization_mark: 'True'
-    suffix: "_Castellated"
-
-led_castellated_smaller_0603:
-    fp_lib_name: 'LED_SMD'
-    size_definitions: ['default_chip_smaller_0603.yaml']
+    size_definitions: ['default_chip.yaml', 'default_chip_smaller_0603.yaml']
     ipc_reference: "ipc_spec_castellated"
     prefix: 'LED'
     description: 'LED SMD {code_imperial:s} ({code_metric:s} Metric), castellated end terminal, IPC_7351 nominal, {size_info:s}, generated with kicad-footprint-generator'
@@ -500,19 +357,8 @@ led_castellated_smaller_0402:
 
 fuse:
     fp_lib_name: 'Fuse'
-    size_definitions: ['default_chip.yaml', 'fuse.yaml']
+    size_definitions: ['default_chip.yaml', 'default_chip_smaller_0603.yaml', 'fuse.yaml']
     ipc_reference: "ipc_spec_larger_or_equal_0603"
-    prefix: 'Fuse'
-    description: 'Fuse SMD {code_imperial:s} ({code_metric:s} Metric), square (rectangular) end terminal, IPC_7351 nominal, {size_info:s}, generated with kicad-footprint-generator'
-    keywords: 'fuse'
-    ipc_density: 'nominal'
-    pad_length_addition: 0
-    suffix: ""
-
-fuse_smaller_0603:
-    fp_lib_name: 'Fuse'
-    size_definitions: ['default_chip_smaller_0603.yaml']
-    ipc_reference: "ipc_spec_smaller_0603"
     prefix: 'Fuse'
     description: 'Fuse SMD {code_imperial:s} ({code_metric:s} Metric), square (rectangular) end terminal, IPC_7351 nominal, {size_info:s}, generated with kicad-footprint-generator'
     keywords: 'fuse'
@@ -522,20 +368,8 @@ fuse_smaller_0603:
 
 fuse_handsolder:
     fp_lib_name: 'Fuse'
-    size_definitions: ['default_chip.yaml', 'fuse.yaml']
+    size_definitions: ['default_chip.yaml', 'default_chip_smaller_0603.yaml', 'fuse.yaml']
     ipc_reference: "ipc_spec_larger_or_equal_0603"
-    prefix: 'Fuse'
-    description: 'Fuse SMD {code_imperial:s} ({code_metric:s} Metric), square (rectangular) end terminal, IPC_7351 nominal with elongated pad for handsoldering. {size_info:s}, generated with kicad-footprint-generator'
-    keywords: 'fuse handsolder'
-    ipc_density: 'nominal'
-    pad_length_addition: 0.35
-    suffix: "_Pad{pad_x:.2f}x{pad_y:.2f}mm_HandSolder"
-    include_suffix_in_3dpath: 'False'
-
-fuse_handsolder_smaller_0603:
-    fp_lib_name: 'Fuse'
-    size_definitions: ['default_chip_smaller_0603.yaml']
-    ipc_reference: "ipc_spec_smaller_0603"
     prefix: 'Fuse'
     description: 'Fuse SMD {code_imperial:s} ({code_metric:s} Metric), square (rectangular) end terminal, IPC_7351 nominal with elongated pad for handsoldering. {size_info:s}, generated with kicad-footprint-generator'
     keywords: 'fuse handsolder'
@@ -546,18 +380,7 @@ fuse_handsolder_smaller_0603:
 
 fuse_castellated:
     fp_lib_name: 'Fuse'
-    size_definitions: ['default_chip.yaml', 'fuse.yaml']
-    ipc_reference: "ipc_spec_castellated"
-    prefix: 'Fuse'
-    description: 'Fuse SMD {code_imperial:s} ({code_metric:s} Metric), castellated end terminal, IPC_7351. {size_info:s}, generated with kicad-footprint-generator'
-    keywords: 'fuse castellated'
-    ipc_density: 'nominal'
-    pad_length_addition: 0
-    suffix: "_Castellated"
-
-fuse_castellated_smaller_0603:
-    fp_lib_name: 'Fuse'
-    size_definitions: ['default_chip_smaller_0603.yaml']
+    size_definitions: ['default_chip.yaml', 'default_chip_smaller_0603.yaml', 'fuse.yaml']
     ipc_reference: "ipc_spec_castellated"
     prefix: 'Fuse'
     description: 'Fuse SMD {code_imperial:s} ({code_metric:s} Metric), castellated end terminal, IPC_7351. {size_info:s}, generated with kicad-footprint-generator'
