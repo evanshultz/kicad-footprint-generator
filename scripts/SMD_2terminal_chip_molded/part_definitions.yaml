@@ -241,32 +241,6 @@ diode_handsolder_smaller_0402:
         all_sides_rel: 0.9 #-10%
         heel_abs: -0.05 # additional heel reduction
 
-diode_castellated:
-    fp_lib_name: 'Diode_SMD'
-    size_definitions: ['default_chip.yaml', 'default_chip_smaller_0603.yaml', 'diode.yaml']
-    ipc_reference: "ipc_spec_castellated"
-    prefix: 'D'
-    description: 'Diode SMD {code_imperial:s} ({code_metric:s} Metric), castellated end terminal, IPC_7351 nominal, {size_info:s}, generated with kicad-footprint-generator'
-    keywords: 'diode castellated'
-    ipc_density: 'nominal'
-    pad_length_addition: 0
-    polarization_mark: 'True'
-    suffix: "_Castellated"
-
-diode_castellated_smaller_0402:
-    fp_lib_name: 'Diode_SMD'
-    size_definitions: ['default_chip_smaller_0402.yaml']
-    ipc_reference: "ipc_spec_castellated"
-    prefix: 'D'
-    description: 'Diode SMD {code_imperial:s} ({code_metric:s} Metric), castellated end terminal, IPC_7351 nominal, {size_info:s}, generated with kicad-footprint-generator'
-    keywords: 'diode castellated'
-    ipc_density: 'nominal'
-    pad_length_addition: 0
-    polarization_mark: 'True'
-    suffix: "_Castellated"
-    paste_pad:
-        all_sides_rel: 0.9 #-10%
-        heel_abs: -0.05 # additional heel reduction
 
 ######################################################################################
 
@@ -326,32 +300,6 @@ led_handsolder_smaller_0402:
         all_sides_rel: 0.9 #-10%
         heel_abs: -0.05 # additional heel reduction
 
-led_castellated:
-    fp_lib_name: 'LED_SMD'
-    size_definitions: ['default_chip.yaml', 'default_chip_smaller_0603.yaml']
-    ipc_reference: "ipc_spec_castellated"
-    prefix: 'LED'
-    description: 'LED SMD {code_imperial:s} ({code_metric:s} Metric), castellated end terminal, IPC_7351 nominal, {size_info:s}, generated with kicad-footprint-generator'
-    keywords: 'LED castellated'
-    ipc_density: 'nominal'
-    pad_length_addition: 0
-    polarization_mark: 'True'
-    suffix: "_Castellated"
-
-led_castellated_smaller_0402:
-    fp_lib_name: 'LED_SMD'
-    size_definitions: ['led_chip_smaller_0402.yaml']
-    ipc_reference: "ipc_spec_castellated"
-    prefix: 'LED'
-    description: 'LED SMD {code_imperial:s} ({code_metric:s} Metric), castellated end terminal, IPC_7351 nominal, {size_info:s}, generated with kicad-footprint-generator'
-    keywords: 'LED castellated'
-    ipc_density: 'nominal'
-    pad_length_addition: 0
-    polarization_mark: 'True'
-    suffix: "_Castellated"
-    paste_pad:
-        all_sides_rel: 0.9 #-10%
-        heel_abs: -0.05 # additional heel reduction
 
 ###############################################################################
 
@@ -377,14 +325,3 @@ fuse_handsolder:
     pad_length_addition: 0.35
     suffix: "_Pad{pad_x:.2f}x{pad_y:.2f}mm_HandSolder"
     include_suffix_in_3dpath: 'False'
-
-fuse_castellated:
-    fp_lib_name: 'Fuse'
-    size_definitions: ['default_chip.yaml', 'default_chip_smaller_0603.yaml', 'fuse.yaml']
-    ipc_reference: "ipc_spec_castellated"
-    prefix: 'Fuse'
-    description: 'Fuse SMD {code_imperial:s} ({code_metric:s} Metric), castellated end terminal, IPC_7351. {size_info:s}, generated with kicad-footprint-generator'
-    keywords: 'fuse castellated'
-    ipc_density: 'nominal'
-    pad_length_addition: 0
-    suffix: "_Castellated"
